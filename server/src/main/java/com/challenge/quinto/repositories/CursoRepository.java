@@ -17,7 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Integer>{
     
-    @Query("SELECT c FROM Curso c WHERE c.nombre = :nombre")
-    public Curso getAlumnosByCursoName(@Param("nombre") String nombre);
     
 }
