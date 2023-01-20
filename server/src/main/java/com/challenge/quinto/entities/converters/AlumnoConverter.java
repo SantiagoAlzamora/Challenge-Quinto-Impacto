@@ -6,14 +6,17 @@ package com.challenge.quinto.entities.converters;
 
 import com.challenge.quinto.entities.Alumno;
 import com.challenge.quinto.entities.dtos.AlumnoDTO;
+import com.challenge.quinto.enums.Role;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author santi
  */
+@Component("AlumnoConverter")
 public class AlumnoConverter {
     
     @Autowired
@@ -22,6 +25,9 @@ public class AlumnoConverter {
     public AlumnoDTO toDTO(Alumno alumno) {
         AlumnoDTO alumnoDTO = new AlumnoDTO();
         alumnoDTO.setId(alumno.getId());
+        alumnoDTO.setEmail(alumno.getEmail());
+        alumnoDTO.setPassword(alumno.getPassword());
+        alumnoDTO.setRole(Role.ALUMNO);
         alumnoDTO.setNombre(alumno.getNombre());
         alumnoDTO.setEdad(alumno.getEdad());
         alumnoDTO.setFechaDeNacimiento(alumno.getFechaDeNacimiento());
@@ -32,6 +38,9 @@ public class AlumnoConverter {
     public Alumno fromDTO(AlumnoDTO alumnoDTO) {
         Alumno alumno = new Alumno();
         alumno.setId(alumnoDTO.getId());
+        alumno.setEmail(alumnoDTO.getEmail());
+        alumno.setPassword(alumnoDTO.getPassword());
+        alumno.setRole(Role.ALUMNO);
         alumno.setNombre(alumnoDTO.getNombre());
         alumno.setEdad(alumnoDTO.getEdad());
         alumno.setFechaDeNacimiento(alumnoDTO.getFechaDeNacimiento());

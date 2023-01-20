@@ -20,11 +20,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Profesor {
+public class Profesor extends Usuario{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     
     private String nombre;
     private String apellido;

@@ -4,8 +4,7 @@
  */
 package com.challenge.quinto.entities.dtos;
 
-import java.util.Date;
-import java.util.List;
+import com.challenge.quinto.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +14,9 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class AlumnoDTO extends UsuarioDTO{
-    private String nombre;
-    private Integer edad;
-    private Date fechaDeNacimiento;
-    private String historia;
-    private List<CursoDTO> cursos;
+public class UsuarioDTO {
+    protected Integer id;
+    protected String email;
+    protected String password;
+    protected Role role;
 }

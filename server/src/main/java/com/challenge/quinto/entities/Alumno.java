@@ -4,6 +4,7 @@
  */
 package com.challenge.quinto.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -23,11 +24,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Alumno {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Alumno extends Usuario{
     
     private String nombre;
     private Integer edad;

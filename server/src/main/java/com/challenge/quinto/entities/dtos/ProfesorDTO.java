@@ -14,8 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ProfesorDTO {
-    private Integer id;
+public class ProfesorDTO extends UsuarioDTO{
     private String nombre;
     private String apellido;
     private List<CursoDTO> cursos;

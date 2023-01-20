@@ -9,9 +9,9 @@ import com.challenge.quinto.entities.converters.CursoConverter;
 import com.challenge.quinto.entities.dtos.CursoDTO;
 import com.challenge.quinto.repositories.CursoRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -26,13 +26,13 @@ public class CursoService {
     @Autowired
     private CursoConverter cursoConverter;
     
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CursoDTO> getAllCursos() {
         List<Curso> cursos = cursoRepository.findAll();
         return cursoConverter.toDTO(cursos);
     }
     
-    @Transactional
+    @Transactional(readOnly = true)
     public CursoDTO getCursoById(Integer id) {
         Curso curso = cursoRepository.findById(id).orElse(null);
         return cursoConverter.toDTO(curso);

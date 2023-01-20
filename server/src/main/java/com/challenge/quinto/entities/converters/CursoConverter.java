@@ -9,11 +9,13 @@ import com.challenge.quinto.entities.dtos.CursoDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author santi
  */
+@Component("CursoConverter")
 public class CursoConverter {
     
     @Autowired
