@@ -52,6 +52,15 @@ public class AlumnoController {
         }  
     }
     
+    @GetMapping("/search/{idCurso}/{letter}")
+    public List<AlumnoDTO> getByCursoIdAndNameContaining(@PathVariable Integer idCurso, @PathVariable String letter){
+        try {
+            return alumnoService.getByCursoIdAndNameContaining(idCurso,letter);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
     @GetMapping("/search/{idCurso}")
     public List<AlumnoDTO> getAlumnosFromCursoById(@PathVariable Integer idCurso){
         try {

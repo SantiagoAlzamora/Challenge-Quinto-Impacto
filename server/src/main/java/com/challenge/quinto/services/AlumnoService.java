@@ -33,8 +33,8 @@ public class AlumnoService {
     }
     
     @Transactional
-    public List<AlumnoDTO> getAlumnosByNameFromCurso(Integer idCurso, String nombre){
-        List<Alumno> alumnos = alumnoRepository.getAlumnosByWordFromCurso(idCurso, nombre);
+    public List<AlumnoDTO> getByCursoIdAndNameContaining(Integer idCurso, String nombre){
+        List<Alumno> alumnos = alumnoRepository.findByCursoIdAndNameContaining(idCurso, nombre);
         return alumnoConverter.toDTO(alumnos);
     }
 
