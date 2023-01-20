@@ -22,6 +22,9 @@ public class ProfesorConverter {
     public ProfesorDTO toDTO(Profesor profesor) {
         ProfesorDTO profesorDTO = new ProfesorDTO();
         profesorDTO.setId(profesor.getId());
+        profesorDTO.setEmail(profesor.getEmail());
+        profesorDTO.setPassword(profesor.getPassword());
+        profesorDTO.setRole(profesor.getRole());
         profesorDTO.setNombre(profesor.getNombre());
         profesorDTO.setApellido(profesor.getApellido());
         profesorDTO.setCursos(cursoConverter.toDTO(profesor.getCursos()));
@@ -30,6 +33,9 @@ public class ProfesorConverter {
     public Profesor fromDTO(ProfesorDTO profesorDTO) {
         Profesor profesor = new Profesor();
         profesor.setId(profesorDTO.getId());
+        profesor.setEmail(profesorDTO.getEmail());
+        profesor.setPassword(profesorDTO.getPassword());
+        profesor.setRole(profesorDTO.getRole());
         profesor.setNombre(profesorDTO.getNombre());
         profesor.setApellido(profesorDTO.getApellido());
         profesor.setCursos(cursoConverter.fromDTO(profesorDTO.getCursos()));

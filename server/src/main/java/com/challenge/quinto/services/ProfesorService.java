@@ -9,9 +9,9 @@ import com.challenge.quinto.entities.converters.ProfesorConverter;
 import com.challenge.quinto.entities.dtos.ProfesorDTO;
 import com.challenge.quinto.repositories.ProfesorRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -26,13 +26,13 @@ public class ProfesorService {
     @Autowired
     private ProfesorConverter profesorConverter;
     
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ProfesorDTO> getAllProfesores() {
         List<Profesor> profesores = profesorRepository.findAll();
         return profesorConverter.toDTO(profesores);
     }
     
-    @Transactional
+    @Transactional(readOnly = true)
     public ProfesorDTO getProfesorById(Integer id) {
         Profesor profesor = profesorRepository.findById(id).orElse(null);
         return profesorConverter.toDTO(profesor);

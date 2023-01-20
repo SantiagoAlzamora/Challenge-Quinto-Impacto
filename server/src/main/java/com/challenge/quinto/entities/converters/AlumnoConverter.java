@@ -22,6 +22,9 @@ public class AlumnoConverter {
     public AlumnoDTO toDTO(Alumno alumno) {
         AlumnoDTO alumnoDTO = new AlumnoDTO();
         alumnoDTO.setId(alumno.getId());
+        alumnoDTO.setEmail(alumno.getEmail());
+        alumnoDTO.setPassword(alumno.getPassword());
+        alumnoDTO.setRole(alumno.getRole());
         alumnoDTO.setNombre(alumno.getNombre());
         alumnoDTO.setEdad(alumno.getEdad());
         alumnoDTO.setFechaDeNacimiento(alumno.getFechaDeNacimiento());
@@ -32,6 +35,9 @@ public class AlumnoConverter {
     public Alumno fromDTO(AlumnoDTO alumnoDTO) {
         Alumno alumno = new Alumno();
         alumno.setId(alumnoDTO.getId());
+        alumno.setEmail(alumnoDTO.getEmail());
+        alumno.setPassword(alumnoDTO.getPassword());
+        alumno.setRole(alumnoDTO.getRole());
         alumno.setNombre(alumnoDTO.getNombre());
         alumno.setEdad(alumnoDTO.getEdad());
         alumno.setFechaDeNacimiento(alumnoDTO.getFechaDeNacimiento());

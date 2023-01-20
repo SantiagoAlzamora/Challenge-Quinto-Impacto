@@ -9,9 +9,9 @@ import com.challenge.quinto.entities.converters.AlumnoConverter;
 import com.challenge.quinto.entities.dtos.AlumnoDTO;
 import com.challenge.quinto.repositories.AlumnoRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -26,25 +26,25 @@ public class AlumnoService {
     @Autowired
     private AlumnoConverter alumnoConverter;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<AlumnoDTO> getAllAlumnos() {
         List<Alumno> alumnos = alumnoRepository.findAll();
         return alumnoConverter.toDTO(alumnos);
     }
     
-    @Transactional
+    @Transactional(readOnly = true)
     public List<AlumnoDTO> getByCursoIdAndNameContaining(Integer idCurso, String nombre){
         List<Alumno> alumnos = alumnoRepository.findByCursoIdAndNameContaining(idCurso, nombre);
         return alumnoConverter.toDTO(alumnos);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public AlumnoDTO getAlumnoById(Integer id) {
         Alumno alumno = alumnoRepository.findById(id).orElse(null);
         return alumnoConverter.toDTO(alumno);
     }
     
-    @Transactional
+    @Transactional(readOnly = true)
     public AlumnoDTO getAlumnoByNombre(String nombre){
         Alumno alumno = alumnoRepository.getAlumnoByNombre(nombre);
         if (alumno != null) {
