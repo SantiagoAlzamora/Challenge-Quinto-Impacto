@@ -18,8 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
     
-    @Query("SELECT a FROM Curso c JOIN c.alumnos a WHERE  c.id = :idCurso AND a.nombre LIKE %:word%")
-    public List<Alumno> getAlumnosByWordFromCurso(@Param("idCurso") int idCurso, @Param("word") String word);
+    @Query("SELECT a FROM Alumno a JOIN a.cursos c WHERE c.id = :idCurso AND a.nombre LIKE %:letter%")
+    public List<Alumno> findByCursoIdAndNameContaining(@Param("idCurso") Integer idCurso, @Param("letter") String letter);
     
     @Query("SELECT a FROM Alumno a WHERE a.nombre = :nombre")
     public Alumno getAlumnoByNombre(@Param("nombre") String nombre);
