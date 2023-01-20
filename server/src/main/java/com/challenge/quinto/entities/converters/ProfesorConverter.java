@@ -6,14 +6,17 @@ package com.challenge.quinto.entities.converters;
 
 import com.challenge.quinto.entities.Profesor;
 import com.challenge.quinto.entities.dtos.ProfesorDTO;
+import com.challenge.quinto.enums.Role;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author santi
  */
+@Component("ProfesorConverter")
 public class ProfesorConverter {
     
     @Autowired
@@ -24,7 +27,7 @@ public class ProfesorConverter {
         profesorDTO.setId(profesor.getId());
         profesorDTO.setEmail(profesor.getEmail());
         profesorDTO.setPassword(profesor.getPassword());
-        profesorDTO.setRole(profesor.getRole());
+        profesorDTO.setRole(Role.PROFESOR);
         profesorDTO.setNombre(profesor.getNombre());
         profesorDTO.setApellido(profesor.getApellido());
         profesorDTO.setCursos(cursoConverter.toDTO(profesor.getCursos()));
@@ -35,7 +38,7 @@ public class ProfesorConverter {
         profesor.setId(profesorDTO.getId());
         profesor.setEmail(profesorDTO.getEmail());
         profesor.setPassword(profesorDTO.getPassword());
-        profesor.setRole(profesorDTO.getRole());
+        profesor.setRole(Role.PROFESOR);
         profesor.setNombre(profesorDTO.getNombre());
         profesor.setApellido(profesorDTO.getApellido());
         profesor.setCursos(cursoConverter.fromDTO(profesorDTO.getCursos()));
