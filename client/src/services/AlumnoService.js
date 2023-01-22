@@ -10,7 +10,7 @@ export async function saveAlumno(alumno){
 }
 
 export async function addCursosAlumno(idAlumno,cursos){
-    const res = await axios.put(`${API_ALUMNOS}/cursos/${idAlumno}`,cursos,BASE_HEADERS)
+    const res = await axios.patch(`${API_ALUMNOS}/${idAlumno}`,cursos,BASE_HEADERS)
     console.log(res);
 }
 
@@ -31,5 +31,10 @@ export async function getAlumnoById(idAlumno){
 
 export async function updateAlumno(idAlumno,alumno){
     const res = await axios.put(`${API_ALUMNOS}/${idAlumno}`,alumno,BASE_HEADERS)
+    console.log(res);
+}
+
+export async function getAlumnosByName(name){
+    const res = await axios.get(`${API_ALUMNOS}/search?nombre=${name}`,BASE_HEADERS)
     console.log(res);
 }

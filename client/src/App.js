@@ -5,6 +5,8 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+import Alumnos from './pages/Alumnos/Alumnos';
+import PerfilAlumno from './pages/Alumnos/PerfilAlumno';
 
 
 function ProtectedRoute({ children }) {
@@ -27,6 +29,18 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path:"/alumno/:id",
+    element: <PerfilAlumno/>
+  },
+  {
+    path:"/alumno",
+    element: <Alumnos />
+  },
+  {
+    path:"/profesor/:id",
+    element: <></>
   }
 ]);
 
