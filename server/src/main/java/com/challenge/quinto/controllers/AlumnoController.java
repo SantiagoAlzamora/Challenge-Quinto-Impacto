@@ -8,7 +8,9 @@ import com.challenge.quinto.entities.dtos.AlumnoDTO;
 import com.challenge.quinto.services.AlumnoService;
 import com.challenge.quinto.services.CursoService;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +37,10 @@ public class AlumnoController {
     private CursoService cursoService;
 
     @GetMapping
-    public List<AlumnoDTO> getAllAlumnos() {
+    @PreAuthorize("hasRole('ALUMNO')")
+    public List<AlumnoDTO> getAllAlumnos(HttpSession session) {
         try {
+            System.out.println(session.getAttribute("usuariosession"));
             return alumnoService.getAllAlumnos();
         } catch (Exception e) {
             System.err.println(e.getMessage());

@@ -1,12 +1,13 @@
 import './App.css'
 import Register from './pages/Register/Register'
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom"
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
 import Alumnos from './pages/Alumnos/Alumnos';
 import PerfilAlumno from './pages/Alumnos/PerfilAlumno';
+import Header from './components/Header'
 
 
 function ProtectedRoute({ children }) {
@@ -17,10 +18,38 @@ function ProtectedRoute({ children }) {
   return children
 }
 
+function Layout() {
+  return (
+    <div>
+      <Header />
+      <Outlet />
+    </div>
+  )
+}
+
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ProtectedRoute><Home /></ProtectedRoute>
+    element: <ProtectedRoute><Layout /></ProtectedRoute>,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "/alumno/:id",
+        element: <PerfilAlumno/>
+      },
+      {
+        path:"/alumno",
+        element: <Alumnos />
+      },
+      {
+        path:"/profesor/:id",
+        element: <Layout></Layout>
+      }
+    ]
   },
   {
     path: "/login",
@@ -29,18 +58,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
-  },
-  {
-    path:"/alumno/:id",
-    element: <PerfilAlumno/>
-  },
-  {
-    path:"/alumno",
-    element: <Alumnos />
-  },
-  {
-    path:"/profesor/:id",
-    element: <></>
   }
 ]);
 
@@ -48,6 +65,7 @@ function App() {
 
   return (
     <div className="App">
+      
       <RouterProvider router={router} />
     </div>
   );

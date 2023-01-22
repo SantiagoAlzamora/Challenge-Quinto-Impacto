@@ -6,7 +6,7 @@ const API_ALUMNOS = `${API_URL}/alumnos`
 
 export async function saveAlumno(alumno){
     const res = await axios.post(`${API_ALUMNOS}`,alumno,BASE_HEADERS)
-    console.log(res);
+    return res
 }
 
 export async function addCursosAlumno(idAlumno,cursos){
@@ -16,7 +16,7 @@ export async function addCursosAlumno(idAlumno,cursos){
 
 export async function getAlumnosFromCurso(idCurso){
     const res = await axios.get(`${API_URL}/cursos/${idCurso}`)
-    console.log(res);
+    return res;
 }
 
 export async function getAllAlumnos(){

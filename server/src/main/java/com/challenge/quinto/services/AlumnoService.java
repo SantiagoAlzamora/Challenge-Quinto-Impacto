@@ -10,6 +10,7 @@ import com.challenge.quinto.entities.dtos.AlumnoDTO;
 import com.challenge.quinto.repositories.AlumnoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +56,8 @@ public class AlumnoService {
 
     @Transactional
     public AlumnoDTO createAlumno(AlumnoDTO alumnoDTO) {
+        
+        alumnoDTO.setPassword(new BCryptPasswordEncoder().encode(alumnoDTO.getPassword()));
         Alumno alumno = alumnoConverter.fromDTO(alumnoDTO);
         alumno = alumnoRepository.save(alumno);
         return alumnoConverter.toDTO(alumno);

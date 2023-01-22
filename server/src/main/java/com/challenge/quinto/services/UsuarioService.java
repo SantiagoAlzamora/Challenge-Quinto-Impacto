@@ -4,6 +4,7 @@
  */
 package com.challenge.quinto.services;
 
+import com.challenge.quinto.entities.Credencial;
 import com.challenge.quinto.entities.Usuario;
 import com.challenge.quinto.repositories.UsuarioRepository;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -25,17 +27,28 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author santi
  */
 @Service
-public class UsuarioService implements UserDetailsService{
-    
+public class UsuarioService implements UserDetailsService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    public Usuario loginUsuario(Credencial credencial){
+        Usuario usuario =usuarioRepository.getUsuarioByEmail(credencial.getEmail());
+        BCryptPasswordEncoder crypt =new BCryptPasswordEncoder();
+        if (usuario == null) {
+            return null;
+        }
+        if (!crypt.matches(credencial.getPassword(), usuario.getPassword())) {
+            return null;
+        }
+        return usuario;
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-       Usuario usuario = usuarioRepository.getUsuarioByEmail(email);
-
+    public UserDetails loadUserByUsername(String email) {
+        Usuario usuario = usuarioRepository.getUsuarioByEmail(email);
         if (usuario != null) {
-
+            
             List<GrantedAuthority> permisos = new ArrayList();
 
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRole().toString());
@@ -47,11 +60,12 @@ public class UsuarioService implements UserDetailsService{
             HttpSession session = attr.getRequest().getSession(true);
 
             session.setAttribute("usuariosession", usuario);
-
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
+            
+            User u = new User(usuario.getEmail(), usuario.getPassword(), permisos);
+            return u;
         } else {
             return null;
         }
     }
-    
+
 }
