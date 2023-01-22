@@ -27,7 +27,7 @@ public class Profesor extends Usuario{
     private String nombre;
     private String apellido;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "profesor")
     private List<Curso> cursos;
     
 }
