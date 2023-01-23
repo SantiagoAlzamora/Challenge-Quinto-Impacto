@@ -33,6 +33,12 @@ public class CursoService {
     }
     
     @Transactional(readOnly = true)
+    public List<CursoDTO> getCursosByNombre(String nombre) {
+        List<Curso> cursos = cursoRepository.getCursosByNombre(nombre);
+        return cursoConverter.toDTO(cursos);
+    }
+    
+    @Transactional(readOnly = true)
     public CursoDTO getCursoById(Integer id) {
         Curso curso = cursoRepository.findById(id).orElse(null);
         return cursoConverter.toDTO(curso);
@@ -41,6 +47,16 @@ public class CursoService {
     @Transactional
     public CursoDTO createCurso(CursoDTO cursoDTO) {
         Curso curso = cursoConverter.fromDTO(cursoDTO);
+        curso = cursoRepository.save(curso);
+        return cursoConverter.toDTO(curso);
+    }
+    
+    @Transactional
+    public CursoDTO deleteProfesorFromCurso(Integer idCurso){
+        Curso curso = cursoRepository.findById(idCurso).orElse(null);
+        CursoDTO cursoDTO = cursoConverter.toDTO(curso);
+        cursoDTO.setProfesor(null);
+        curso = cursoConverter.fromDTO(cursoDTO);
         curso = cursoRepository.save(curso);
         return cursoConverter.toDTO(curso);
     }

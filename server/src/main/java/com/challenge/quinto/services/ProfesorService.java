@@ -33,6 +33,12 @@ public class ProfesorService {
     }
     
     @Transactional(readOnly = true)
+    public List<ProfesorDTO> getProfesoresByNombre(String nombre) {
+        List<Profesor> profesores = profesorRepository.getProfesoresByNombre(nombre);
+        return profesorConverter.toDTO(profesores);
+    }
+    
+    @Transactional(readOnly = true)
     public ProfesorDTO getProfesorById(Integer id) {
         Profesor profesor = profesorRepository.findById(id).orElse(null);
         return profesorConverter.toDTO(profesor);

@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,7 +43,7 @@ public class Curso {
     
     private String horario;
     
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cursos")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cursos", fetch = FetchType.EAGER)
     private List<Alumno> alumnos;
 
 }
