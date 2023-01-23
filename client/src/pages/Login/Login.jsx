@@ -1,7 +1,6 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { AuthContext } from '../../context/AuthContext'
-import { getAllAlumnos } from '../../services/AlumnoService'
 import { loginUser } from '../../services/UserService'
 
 export default function Login() {
@@ -10,23 +9,28 @@ export default function Login() {
   const passwordRef = useRef()
   const { dispatch } = useContext(AuthContext)
   const navigate = useNavigate()
+  const {data}=useContext(AuthContext)
+  useEffect(()=>{
+    if(data.user){
+      navigate("/")
+    }
+  })
 
   async function handleLogin(e) {
     e.preventDefault()
-    const email = emailRef.current.value
-    const password = passwordRef.current.value
-    const user = await loginUser(email, password)
-    dispatch({
-      type: "LOGIN",
-      payload: user
-    })
-    if(user){
+    try {
+      const email = emailRef.current.value
+      const password = passwordRef.current.value
+      const user = await loginUser(email, password)
+      dispatch({
+        type: "LOGIN",
+        payload: user
+      })
       navigate("/")
+    } catch (error) {
+      console.log(error);
     }
-  }
 
-  async function getAll() {
-    await getAllAlumnos()
   }
 
   return (

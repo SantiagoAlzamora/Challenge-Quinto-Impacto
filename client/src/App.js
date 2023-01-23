@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import Register from './pages/Register/Register'
 import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom"
 import Home from './pages/Home/Home';
@@ -8,6 +8,7 @@ import { AuthContext } from './context/AuthContext';
 import Alumnos from './pages/Alumnos/Alumnos';
 import PerfilAlumno from './pages/Alumnos/PerfilAlumno';
 import Header from './components/Header'
+import Profesores from './pages/Profesores/Profesores';
 
 
 function ProtectedRoute({ children }) {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path:"/profesor/:id",
         element: <Layout></Layout>
+      },
+      {
+        path:"/profesor",
+        element: <Profesores />
       }
     ]
   },

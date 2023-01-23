@@ -25,8 +25,8 @@ export async function getAllProfesores(){
 }
 
 export async function getProfesorById(idProfesor){
-    const res = axios.get(`${API_PROFESORES}/${idProfesor}`)
-    console.log(res);
+    const res = await axios.get(`${API_PROFESORES}/${idProfesor}`)
+    return res.data;
 }
 
 export async function updateProfesor(idProfesor,profesor){

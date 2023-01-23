@@ -49,7 +49,7 @@ public class AlumnoController {
     }
     
     @GetMapping("/search")
-    public AlumnoDTO getAlumnoByNombre(@RequestParam String nombre) {
+    public List<AlumnoDTO> getAlumnoByNombre(@RequestParam String nombre) {
         try {
             return alumnoService.getAlumnoByNombre(nombre);
         } catch (Exception e) {

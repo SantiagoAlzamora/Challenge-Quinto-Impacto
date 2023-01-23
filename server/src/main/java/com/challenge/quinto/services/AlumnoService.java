@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class AlumnoService {
-    
+
     @Autowired
     private AlumnoRepository alumnoRepository;
 
@@ -32,9 +32,9 @@ public class AlumnoService {
         List<Alumno> alumnos = alumnoRepository.findAll();
         return alumnoConverter.toDTO(alumnos);
     }
-    
+
     @Transactional(readOnly = true)
-    public List<AlumnoDTO> getByCursoIdAndNameContaining(Integer idCurso, String nombre){
+    public List<AlumnoDTO> getByCursoIdAndNameContaining(Integer idCurso, String nombre) {
         List<Alumno> alumnos = alumnoRepository.findByCursoIdAndNameContaining(idCurso, nombre);
         return alumnoConverter.toDTO(alumnos);
     }
@@ -44,19 +44,18 @@ public class AlumnoService {
         Alumno alumno = alumnoRepository.findById(id).orElse(null);
         return alumnoConverter.toDTO(alumno);
     }
-    
+
     @Transactional(readOnly = true)
-    public AlumnoDTO getAlumnoByNombre(String nombre){
-        Alumno alumno = alumnoRepository.getAlumnoByNombre(nombre);
-        if (alumno != null) {
-            return alumnoConverter.toDTO(alumno);
-        }
-        return null;
+    public List<AlumnoDTO> getAlumnoByNombre(String nombre) {
+        List<Alumno> alumnos = alumnoRepository.getAlumnoByNombre(nombre);
+
+        return alumnoConverter.toDTO(alumnos);
+
     }
 
     @Transactional
     public AlumnoDTO createAlumno(AlumnoDTO alumnoDTO) {
-        
+
         alumnoDTO.setPassword(new BCryptPasswordEncoder().encode(alumnoDTO.getPassword()));
         Alumno alumno = alumnoConverter.fromDTO(alumnoDTO);
         alumno = alumnoRepository.save(alumno);

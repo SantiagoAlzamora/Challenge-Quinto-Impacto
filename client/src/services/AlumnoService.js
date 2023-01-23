@@ -25,8 +25,8 @@ export async function getAllAlumnos(){
 }
 
 export async function getAlumnoById(idAlumno){
-    const res = axios.get(`${API_ALUMNOS}/${idAlumno}`)
-    console.log(res);
+    const res = await axios.get(`${API_ALUMNOS}/${idAlumno}`)
+    return res.data
 }
 
 export async function updateAlumno(idAlumno,alumno){
@@ -36,5 +36,5 @@ export async function updateAlumno(idAlumno,alumno){
 
 export async function getAlumnosByName(name){
     const res = await axios.get(`${API_ALUMNOS}/search?nombre=${name}`,BASE_HEADERS)
-    console.log(res);
+    return res.data
 }

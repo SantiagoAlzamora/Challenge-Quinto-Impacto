@@ -22,6 +22,6 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
     public List<Alumno> findByCursoIdAndNameContaining(@Param("idCurso") Integer idCurso, @Param("letter") String letter);
     
     @Query("SELECT a FROM Alumno a WHERE a.nombre = :nombre")
-    public Alumno getAlumnoByNombre(@Param("nombre") String nombre);
+    public List<Alumno> getAlumnoByNombre(@Param("nombre") String nombre);
     
 }

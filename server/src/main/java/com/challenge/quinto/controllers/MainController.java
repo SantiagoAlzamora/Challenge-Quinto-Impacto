@@ -10,6 +10,8 @@ import com.challenge.quinto.entities.Profesor;
 import com.challenge.quinto.entities.Usuario;
 import com.challenge.quinto.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,19 +32,19 @@ public class MainController {
     private UsuarioService usuarioService;
     
     @PostMapping("/login")
-    public Object index(@RequestBody Credencial credencial){
+    public ResponseEntity<Usuario> index(@RequestBody Credencial credencial){
         try {
             Usuario usuario = usuarioService.loginUsuario(credencial);
             switch(usuario.getRole().toString()){
                 case "ALUMNO":
-                    return (Alumno) usuario;
+                    return ResponseEntity.status(200).body((Alumno) usuario);
                 case "PROFESOR":
-                    return (Profesor) usuario;
+                    return ResponseEntity.status(200).body((Profesor) usuario);
                 default :
-                    return usuario;
+                    return ResponseEntity.status(200).body(usuario);
             }
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
         
     }
