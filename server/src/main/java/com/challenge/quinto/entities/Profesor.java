@@ -7,9 +7,7 @@ package com.challenge.quinto.entities;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +25,7 @@ public class Profesor extends Usuario{
     private String nombre;
     private String apellido;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "profesor")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "profesor", fetch = FetchType.EAGER)
     private List<Curso> cursos;
     
 }

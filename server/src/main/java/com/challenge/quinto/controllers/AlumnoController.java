@@ -10,6 +10,8 @@ import com.challenge.quinto.services.CursoService;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,94 +32,95 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/alumnos")
 @CrossOrigin(origins = "*")
 public class AlumnoController {
+
     @Autowired
     private AlumnoService alumnoService;
-    
+
     @Autowired
     private CursoService cursoService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ALUMNO')")
-    public List<AlumnoDTO> getAllAlumnos(HttpSession session) {
+    public ResponseEntity<List<AlumnoDTO>> getAllAlumnos() {
         try {
-            System.out.println(session.getAttribute("usuariosession"));
-            return alumnoService.getAllAlumnos();
+            return ResponseEntity.status(200).body(alumnoService.getAllAlumnos());
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return null;
-        }  
-    }
-    
-    @GetMapping("/search")
-    public List<AlumnoDTO> getAlumnoByNombre(@RequestParam String nombre) {
-        try {
-            return alumnoService.getAlumnoByNombre(nombre);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return null;
-        }  
-    }
-    
-    @GetMapping("/search/{idCurso}/{letter}")
-    public List<AlumnoDTO> getByCursoIdAndNameContaining(@PathVariable Integer idCurso, @PathVariable String letter){
-        try {
-            return alumnoService.getByCursoIdAndNameContaining(idCurso,letter);
-        } catch (Exception e) {
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
     }
-    
-    @GetMapping("/search/{idCurso}")
-    public List<AlumnoDTO> getAlumnosFromCursoById(@PathVariable Integer idCurso){
+
+    @GetMapping("/search")
+    public ResponseEntity<List<AlumnoDTO>> getAlumnosByNombre(@RequestParam String nombre) {
         try {
-            return cursoService.getCursoById(idCurso).getAlumnos();
+            return ResponseEntity.status(200).body(alumnoService.getAlumnoByNombre(nombre));
         } catch (Exception e) {
-            return null;
+            System.err.println(e.getMessage());
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
+    @GetMapping("/search/{idCurso}/{letter}")
+    public ResponseEntity<List<AlumnoDTO>> getByCursoIdAndNameContaining(@PathVariable Integer idCurso, @PathVariable String letter) {
+        try {
+            return ResponseEntity.status(200).body(alumnoService.getByCursoIdAndNameContaining(idCurso, letter));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
+    @GetMapping("/search/{idCurso}")
+    public ResponseEntity<List<AlumnoDTO>> getAlumnosFromCursoById(@PathVariable Integer idCurso) {
+        try {
+
+            return ResponseEntity.status(200).body(cursoService.getCursoById(idCurso).getAlumnos());
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
         }
     }
 
     @GetMapping("/{id}")
-    public AlumnoDTO getAlumnoById(@PathVariable Integer id) {
+    public ResponseEntity<AlumnoDTO> getAlumnoById(@PathVariable Integer id) {
         try {
-            return alumnoService.getAlumnoById(id);
+
+            return ResponseEntity.status(200).body(alumnoService.getAlumnoById(id));
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
-        
+
     }
 
     @PostMapping
-    public AlumnoDTO createAlumno(@RequestBody AlumnoDTO alumnoDTO) {
+    public ResponseEntity<AlumnoDTO> createAlumno(@RequestBody AlumnoDTO alumnoDTO) {
         try {
-            return alumnoService.createAlumno(alumnoDTO);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(alumnoService.createAlumno(alumnoDTO));
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
-        
+
     }
 
     @PutMapping("/{id}")
-    public AlumnoDTO updateAlumno(@PathVariable Integer id, @RequestBody AlumnoDTO alumnoDTO) {
+    public ResponseEntity<AlumnoDTO> updateAlumno(@PathVariable Integer id, @RequestBody AlumnoDTO alumnoDTO) {
         try {
-            return alumnoService.updateAlumno(id, alumnoDTO);
+            return ResponseEntity.status(200).body(alumnoService.updateAlumno(id, alumnoDTO));
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
-        
+
     }
 
     @DeleteMapping("/{id}")
-    public String deleteAlumno(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteAlumno(@PathVariable Integer id) {
         try {
             alumnoService.deleteAlumno(id);
-            return "Alumno deleted successfuly";
+            return ResponseEntity.ok("Alumno deleted successfuly");
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
-        
+
     }
 }

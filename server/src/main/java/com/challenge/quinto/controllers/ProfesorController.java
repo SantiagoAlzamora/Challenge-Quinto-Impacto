@@ -8,6 +8,8 @@ import com.challenge.quinto.entities.dtos.ProfesorDTO;
 import com.challenge.quinto.services.ProfesorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,52 +31,61 @@ public class ProfesorController {
     private ProfesorService profesorService;
 
     @GetMapping
-    public List<ProfesorDTO> getAllProfesores() {
+    public ResponseEntity<List<ProfesorDTO>> getAllProfesores() {
         try {
-            return profesorService.getAllProfesores();
+            return ResponseEntity.status(200).body(profesorService.getAllProfesores());
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
         
     }
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<ProfesorDTO>> getProfesoresByNombre(@RequestParam String nombre) {
+        try {
+            return ResponseEntity.status(200).body(profesorService.getProfesoresByNombre(nombre));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
+        }   
+    }
 
     @GetMapping("/{id}")
-    public ProfesorDTO getProfesorById(@PathVariable Integer id) {
+    public ResponseEntity<ProfesorDTO> getProfesorById(@PathVariable Integer id) {
         try {
-            return profesorService.getProfesorById(id);
+            return ResponseEntity.status(200).body(profesorService.getProfesorById(id));
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
         
     }
 
     @PostMapping
-    public ProfesorDTO createProfesor(@RequestBody ProfesorDTO profesorDTO) {
+    public ResponseEntity<ProfesorDTO> createProfesor(@RequestBody ProfesorDTO profesorDTO) {
         try {
-            return profesorService.createProfesor(profesorDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(profesorService.createProfesor(profesorDTO));
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
         
     }
 
     @PutMapping("/{id}")
-    public ProfesorDTO updateProfesor(@PathVariable Integer id, @RequestBody ProfesorDTO profesorDTO) {
+    public ResponseEntity<ProfesorDTO> updateProfesor(@PathVariable Integer id, @RequestBody ProfesorDTO profesorDTO) {
         try {
-            return profesorService.updateProfesor(id, profesorDTO);
+            return ResponseEntity.status(200).body(profesorService.updateProfesor(id, profesorDTO));
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
         
     }
 
     @DeleteMapping("/{id}")
-    public String deleteProfesor(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteProfesor(@PathVariable Integer id) {
         try {
             profesorService.deleteProfesor(id);
-            return "Profesor deleted successfuly";
+            return ResponseEntity.status(200).body("Profesor deleted successfuly");
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.status(400).body(null);
         }
         
     }

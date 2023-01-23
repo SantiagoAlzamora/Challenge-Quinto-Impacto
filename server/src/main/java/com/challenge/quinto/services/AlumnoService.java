@@ -66,6 +66,7 @@ public class AlumnoService {
     public AlumnoDTO updateAlumno(Integer id, AlumnoDTO alumnoDTO) {
         Alumno alumno = alumnoRepository.findById(id).orElse(null);
         if (alumno != null) {
+            alumnoDTO.setPassword(new BCryptPasswordEncoder().encode(alumnoDTO.getPassword()));
             alumno = alumnoConverter.fromDTO(alumnoDTO);
             alumno.setId(id);
             alumno = alumnoRepository.save(alumno);
