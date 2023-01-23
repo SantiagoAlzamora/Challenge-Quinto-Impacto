@@ -25,7 +25,7 @@ public class CursoService {
 
     @Autowired
     private CursoConverter cursoConverter;
-    
+
     @Transactional(readOnly = true)
     public List<CursoDTO> getAllCursos() {
         List<Curso> cursos = cursoRepository.findAll();
@@ -33,26 +33,38 @@ public class CursoService {
     }
     
     @Transactional(readOnly = true)
+    public List<CursoDTO> getCursosWhereAlumnoNotIn(Integer id) {
+        List<Curso> cursos = cursoRepository.getCursosWhereAlumnoNotIn(id);
+        return cursoConverter.toDTO(cursos);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<CursoDTO> getCursosWhereProfesorNotIn(Integer id) {
+        List<Curso> cursos = cursoRepository.getCursosWhereProfesorNotIn(id);
+        return cursoConverter.toDTO(cursos);
+    }
+
+    @Transactional(readOnly = true)
     public List<CursoDTO> getCursosByNombre(String nombre) {
         List<Curso> cursos = cursoRepository.getCursosByNombre(nombre);
         return cursoConverter.toDTO(cursos);
     }
-    
+
     @Transactional(readOnly = true)
     public CursoDTO getCursoById(Integer id) {
         Curso curso = cursoRepository.findById(id).orElse(null);
         return cursoConverter.toDTO(curso);
     }
-    
+
     @Transactional
     public CursoDTO createCurso(CursoDTO cursoDTO) {
         Curso curso = cursoConverter.fromDTO(cursoDTO);
         curso = cursoRepository.save(curso);
         return cursoConverter.toDTO(curso);
     }
-    
+
     @Transactional
-    public CursoDTO deleteProfesorFromCurso(Integer idCurso){
+    public CursoDTO deleteProfesorFromCurso(Integer idCurso) {
         Curso curso = cursoRepository.findById(idCurso).orElse(null);
         CursoDTO cursoDTO = cursoConverter.toDTO(curso);
         cursoDTO.setProfesor(null);
@@ -60,7 +72,7 @@ public class CursoService {
         curso = cursoRepository.save(curso);
         return cursoConverter.toDTO(curso);
     }
-    
+
     @Transactional
     public CursoDTO updateCurso(Integer id, CursoDTO cursoDTO) {
         Curso curso = cursoRepository.findById(id).orElse(null);
@@ -73,6 +85,8 @@ public class CursoService {
         return null;
     }
     
+    
+
     public void deleteCurso(Integer id) {
         cursoRepository.deleteById(id);
     }

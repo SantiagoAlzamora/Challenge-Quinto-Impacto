@@ -16,8 +16,14 @@ import org.springframework.stereotype.Repository;
  * @author santi
  */
 @Repository
-public interface CursoRepository extends JpaRepository<Curso, Integer>{
-    
+public interface CursoRepository extends JpaRepository<Curso, Integer> {
+
     @Query("SELECT c FROM Curso c WHERE c.nombre LIKE :nombre%")
     public List<Curso> getCursosByNombre(@Param("nombre") String nombre);
+
+    @Query("SELECT c FROM Curso c WHERE c.id NOT IN (SELECT a.cursos FROM Alumno a WHERE a.id = :idAlumno)")
+    public List<Curso> getCursosWhereAlumnoNotIn(@Param("idAlumno") Integer idAlumno);
+
+    @Query("SELECT c FROM Curso c WHERE c.profesor.id != :idProfesor")
+    public List<Curso> getCursosWhereProfesorNotIn(@Param("idProfesor") Integer idProfesor);
 }
