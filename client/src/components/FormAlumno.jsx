@@ -27,7 +27,7 @@ export default function FormAlumno() {
     }
     console.log(alumno);
     const res = await saveAlumno(alumno)
-    if (res.data) {
+    if (res) {
       navigate("/login")
     } else {
       setError(true)

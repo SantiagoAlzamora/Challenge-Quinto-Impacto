@@ -1,9 +1,8 @@
-.perfil-alumno{
+.curso{
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 80%;
-    height: 80vh;
     margin: auto;
     .info{
         display: flex;
@@ -11,10 +10,10 @@
         align-items: center;
         justify-content: center;
         width: 50%;
-        height: 100%;
         gap: 1rem;
+        border-right: 1px solid lightgrey;
     }
-    .cursos{
+    .alumnos{
         display: flex;
         flex-direction: column;
         align-items: center;

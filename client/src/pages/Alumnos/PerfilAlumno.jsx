@@ -23,7 +23,7 @@ export default function PerfilAlumno() {
             </section>
             <section className='cursos'>
                 {
-                    alumno.cursos.length > 0 ? alumno.cursos.map((curso,i)=> <p key={i}>{curso.nombre}</p>)
+                    alumno.cursos?.length > 0 ? alumno.cursos.map((curso,i)=> <p key={i}>{curso.nombre}</p>)
                     : <p>No se ha inscripto a ningun curso</p>
                 }
             </section>
