@@ -40,6 +40,25 @@ public class CursoController {
         
     }
     
+    @GetMapping("/profesor/{id}")
+    public ResponseEntity<List<CursoDTO>> getCursosWhereProfesorNotInt(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.status(200).body(cursoService.getCursosWhereProfesorNotIn(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
+        }
+        
+    }
+    @GetMapping("/alumno/{id}")
+    public ResponseEntity<List<CursoDTO>> getCursosWhereAlumnoNotInt(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.status(200).body(cursoService.getCursosWhereAlumnoNotIn(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
+        }
+        
+    }
+    
     @GetMapping("/search")
     public ResponseEntity<List<CursoDTO>> getCursosByNombre(@RequestParam String nombre) {
         try {

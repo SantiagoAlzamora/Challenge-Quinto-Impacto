@@ -28,7 +28,11 @@ public class CursoConverter {
         CursoDTO cursoDTO = new CursoDTO();
         cursoDTO.setId(curso.getId());
         cursoDTO.setNombre(curso.getNombre());
-        cursoDTO.setProfesor(profesorConverter.toDTO(curso.getProfesor()));
+        if (curso.getProfesor()!=null) {
+            cursoDTO.setProfesor(profesorConverter.toDTO(curso.getProfesor()));
+        }else{
+            cursoDTO.setProfesor(null);
+        }
         cursoDTO.setTurno(curso.getTurno());
         cursoDTO.setHorario(curso.getHorario());
         cursoDTO.setAlumnos(alumnoConverter.toDTO(curso.getAlumnos()));
@@ -38,7 +42,11 @@ public class CursoConverter {
         Curso curso = new Curso();
         curso.setId(cursoDTO.getId());
         curso.setNombre(cursoDTO.getNombre());
-        curso.setProfesor(profesorConverter.fromDTO(cursoDTO.getProfesor()));
+        if (cursoDTO.getProfesor()!=null) {
+            curso.setProfesor(profesorConverter.fromDTO(cursoDTO.getProfesor()));
+        }else{
+            curso.setProfesor(null);
+        }
         curso.setTurno(cursoDTO.getTurno());
         curso.setHorario(cursoDTO.getHorario());
         curso.setAlumnos(alumnoConverter.fromDTO(cursoDTO.getAlumnos()));

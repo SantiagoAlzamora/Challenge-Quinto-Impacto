@@ -7,6 +7,7 @@ package com.challenge.quinto.services;
 import com.challenge.quinto.entities.Alumno;
 import com.challenge.quinto.entities.converters.AlumnoConverter;
 import com.challenge.quinto.entities.dtos.AlumnoDTO;
+import com.challenge.quinto.entities.dtos.CursoDTO;
 import com.challenge.quinto.repositories.AlumnoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,15 @@ public class AlumnoService {
 
         return alumnoConverter.toDTO(alumnos);
 
+    }
+    
+    @Transactional
+    public AlumnoDTO addCursosToAlumno(Integer id, List<CursoDTO> cursosDTO){
+        AlumnoDTO alumnoDTO = getAlumnoById(id);
+        alumnoDTO.setCursos(cursosDTO);
+        Alumno alumno = alumnoConverter.fromDTO(alumnoDTO);
+        alumno = alumnoRepository.save(alumno);
+        return alumnoConverter.toDTO(alumno);
     }
 
     @Transactional

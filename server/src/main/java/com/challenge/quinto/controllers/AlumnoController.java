@@ -5,6 +5,7 @@
 package com.challenge.quinto.controllers;
 
 import com.challenge.quinto.entities.dtos.AlumnoDTO;
+import com.challenge.quinto.entities.dtos.CursoDTO;
 import com.challenge.quinto.services.AlumnoService;
 import com.challenge.quinto.services.CursoService;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -105,6 +107,17 @@ public class AlumnoController {
     public ResponseEntity<AlumnoDTO> updateAlumno(@PathVariable Integer id, @RequestBody AlumnoDTO alumnoDTO) {
         try {
             return ResponseEntity.status(200).body(alumnoService.updateAlumno(id, alumnoDTO));
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return ResponseEntity.status(400).body(null);
+        }
+
+    }
+    
+    @PatchMapping("/{id}")
+    public ResponseEntity<AlumnoDTO> addCursosToAlumno(@PathVariable Integer id, @RequestBody List<CursoDTO> cursosDTO) {
+        try {
+            return ResponseEntity.status(200).body(alumnoService.addCursosToAlumno(id, cursosDTO));
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return ResponseEntity.status(400).body(null);

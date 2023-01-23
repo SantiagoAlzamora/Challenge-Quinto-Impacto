@@ -4,6 +4,7 @@
  */
 package com.challenge.quinto.controllers;
 
+import com.challenge.quinto.entities.dtos.CursoDTO;
 import com.challenge.quinto.entities.dtos.ProfesorDTO;
 import com.challenge.quinto.services.ProfesorService;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -63,6 +65,16 @@ public class ProfesorController {
     public ResponseEntity<ProfesorDTO> createProfesor(@RequestBody ProfesorDTO profesorDTO) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(profesorService.createProfesor(profesorDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
+        }
+        
+    }
+    
+    @PatchMapping("/{id}")
+    public ResponseEntity<ProfesorDTO> addCursosToProfesor(@PathVariable Integer id, @RequestBody List<CursoDTO> cursosDTO) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(profesorService.addCursosToProfesor(id, cursosDTO));
         } catch (Exception e) {
             return ResponseEntity.status(400).body(null);
         }
