@@ -24,8 +24,8 @@ export async function getCursosWhereAlumnoNotIn(id){
     return res.data
 }
 
-export async function getCursosWhereProfesorNotIn(id){
-    const res = await axios.get(`${API_CURSOS}/profesor/${id}`)
+export async function getCursosWhereProfesorNotIn(){
+    const res = await axios.get(`${API_CURSOS}/profesor`)
     return res.data
 }
 
