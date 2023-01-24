@@ -12,6 +12,8 @@ import Profesores from './pages/Profesores/Profesores';
 import Cursos from './pages/Cursos/Cursos';
 import PerfilProfesor from './pages/Profesores/PerfilProfesor'
 import Curso from './pages/Cursos/Curso';
+import FormCurso from './components/FormCurso';
+import CursosAlumno from './pages/Alumnos/CursosAlumno';
 
 
 function ProtectedRoute({ children }) {
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
         element: <Alumnos />
       },
       {
+        path:"/alumno/add-cursos/:id",
+        element: <CursosAlumno />
+      },
+      {
         path:"/profesor/:id",
         element: <PerfilProfesor />
       },
@@ -64,6 +70,10 @@ const router = createBrowserRouter([
       {
         path:"/curso",
         element: <Cursos />
+      },
+      {
+        path:"/curso/crear",
+        element: <FormCurso />
       }
     ]
   },

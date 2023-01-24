@@ -18,10 +18,10 @@ export default function Cursos() {
         </div>
         {cursosByName.length > 0 &&
           <div className='list'>
-            Alumnos
+            Cursos
             {cursosByName.map((curso, i) =>
-              <Link to={`/curso/${curso.id}`}>
-                <p key={i}>
+              <Link to={`/curso/${curso.id}`} key={i}>
+                <p >
                   <span>{curso.nombre}</span> <span>Alumnos: {curso.alumnos.length}</span>
                 </p>
               </Link>

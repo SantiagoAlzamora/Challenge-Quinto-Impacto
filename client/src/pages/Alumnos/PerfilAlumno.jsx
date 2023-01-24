@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { getAlumnoById } from '../../services/AlumnoService'
 import "./perfilAlumno.scss"
 
 export default function PerfilAlumno() {
 
-    const {id} = useParams();
-    const [alumno,setAlumno] = useState({})
+    const { id } = useParams();
+    const [alumno, setAlumno] = useState({})
 
-    useEffect(()=>{
+    useEffect(() => {
         getAlumnoById(id).then(res => setAlumno(res))
-    },[id])
+    }, [id])
+
+
     return (
-        <div className='perfil-alumno'>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 
-            <section className='info'>
-                <span>Nombre: {alumno.nombre}</span>
-                <span>Edad: {alumno.edad}</span>
-                <span>Nacimiento: {new Date(alumno.fechaDeNacimiento+100000000).toLocaleDateString()}</span>
-                <span>Email: {alumno.email}</span>
-                <span>Historia: {alumno.historia}</span>
-            </section>
-            <section className='cursos'>
-                {
-                    alumno.cursos?.length > 0 ? alumno.cursos.map((curso,i)=> <p key={i}>{curso.nombre}</p>)
-                    : <p>No se ha inscripto a ningun curso</p>
-                }
-            </section>
+            <div className='perfil-alumno'>
 
+                <section className='info'>
+                    <span>Nombre: {alumno.nombre}</span>
+                    <span>Edad: {alumno.edad}</span>
+                    <span>Nacimiento: {new Date(alumno.fechaDeNacimiento + 100000000).toLocaleDateString()}</span>
+                    <span>Email: {alumno.email}</span>
+                    <span>Historia: {alumno.historia}</span>
+                </section>
+                <section className='cursos'>
+                    {
+                        alumno.cursos?.length > 0 ? alumno.cursos.map((curso, i) => <p key={i}>{curso.nombre}</p>)
+                            : <Link to={`/alumno/add-cursos/${id}`}>Inscribirse a cursos</Link>
+                    }
+                </section>
+            </div>
+            {alumno.cursos?.length > 0 && <Link to={`/alumno/add-cursos/${id}`}>Inscribirse a cursos</Link>}
         </div>
     )
 }

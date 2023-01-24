@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import { loginUser } from '../../services/UserService'
+import "./login.scss"
 
 export default function Login() {
 
@@ -9,9 +11,9 @@ export default function Login() {
   const passwordRef = useRef()
   const { dispatch } = useContext(AuthContext)
   const navigate = useNavigate()
-  const {data}=useContext(AuthContext)
-  useEffect(()=>{
-    if(data.user){
+  const { data } = useContext(AuthContext)
+  useEffect(() => {
+    if (data.user) {
       navigate("/")
     }
   })
@@ -34,12 +36,17 @@ export default function Login() {
   }
 
   return (
-
-    <form onSubmit={handleLogin}>
-      <input type="email" ref={emailRef} placeholder='email' />
-      <input type="password" ref={passwordRef} placeholder='password' />
-      <button type='submit'>Login</button>
-    </form>
+    <div className='login'>
+      <div className="form-wrapper">
+        <h3>Login Usuario</h3>
+        <form onSubmit={handleLogin}>
+          <input type="email" ref={emailRef} placeholder='email' />
+          <input type="password" ref={passwordRef} placeholder='password' />
+          <button type='submit'>Login</button>
+        </form>
+        <span>No tenes una cuenta <Link to={"/register"}>Register</Link></span>
+      </div>
+    </div>
 
   )
 }

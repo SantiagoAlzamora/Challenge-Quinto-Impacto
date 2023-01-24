@@ -4,6 +4,7 @@
  */
 package com.challenge.quinto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -33,7 +34,8 @@ public class Alumno extends Usuario {
     private Date fechaDeNacimiento;
     private String historia;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinTable(name = "alumno_curso",
             joinColumns = @JoinColumn(name = "alumno_id"),
             inverseJoinColumns = @JoinColumn(name = "curso_id"))

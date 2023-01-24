@@ -27,26 +27,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 @CrossOrigin("*")
 public class MainController {
-    
+
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @PostMapping("/login")
-    public ResponseEntity<Usuario> index(@RequestBody Credencial credencial){
+    public ResponseEntity<Usuario> index(@RequestBody Credencial credencial) {
         try {
             Usuario usuario = usuarioService.loginUsuario(credencial);
-            switch(usuario.getRole().toString()){
-                case "ALUMNO":
-                    return ResponseEntity.status(200).body((Alumno) usuario);
-                case "PROFESOR":
-                    return ResponseEntity.status(200).body((Profesor) usuario);
-                default :
-                    return ResponseEntity.status(200).body(usuario);
+            if (usuario.getRole().toString().equals("ALUMNO")) {
+                usuario = (Alumno) usuario;
             }
+            if (usuario.getRole().toString().equals("PROFESOR")) {
+                usuario = (Profesor) usuario;
+            }
+
+            return ResponseEntity.status(200).body(usuario);
+
         } catch (Exception e) {
             return ResponseEntity.status(400).body(null);
         }
-        
+
     }
-    
+
 }

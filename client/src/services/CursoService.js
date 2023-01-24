@@ -1,7 +1,7 @@
 import axios from "axios";
 import {API_URL, BASE_HEADERS} from "./index"
 
-const API_CURSOS = `${API_URL}/profesores`
+const API_CURSOS = `${API_URL}/cursos`
 
 
 export async function saveCurso(curso){
@@ -16,6 +16,16 @@ export async function deleteProfesorFromCurso(idCurso){
 
 export async function getCursosByName(name){
     const res = await axios.get(`${API_CURSOS}/search?nombre=${name}`)
+    return res.data
+}
+
+export async function getCursosWhereAlumnoNotIn(id){
+    const res = await axios.get(`${API_CURSOS}/alumno/${id}`)
+    return res.data
+}
+
+export async function getCursosWhereProfesorNotIn(id){
+    const res = await axios.get(`${API_CURSOS}/profesor/${id}`)
     return res.data
 }
 

@@ -22,7 +22,13 @@ public class AlumnoConverter {
     @Autowired
     private CursoConverter cursoConverter;
     
+    private boolean converting = false;
+    
     public AlumnoDTO toDTO(Alumno alumno) {
+        if(converting){
+            return null;
+        }
+        converting= true;
         AlumnoDTO alumnoDTO = new AlumnoDTO();
         alumnoDTO.setId(alumno.getId());
         alumnoDTO.setEmail(alumno.getEmail());
@@ -33,9 +39,14 @@ public class AlumnoConverter {
         alumnoDTO.setFechaDeNacimiento(alumno.getFechaDeNacimiento());
         alumnoDTO.setHistoria(alumno.getHistoria());
         alumnoDTO.setCursos(cursoConverter.toDTO(alumno.getCursos()));
+        converting = false;
         return alumnoDTO;
     }
     public Alumno fromDTO(AlumnoDTO alumnoDTO) {
+        if(converting){
+            return null;
+        }
+        converting= true;
         Alumno alumno = new Alumno();
         alumno.setId(alumnoDTO.getId());
         alumno.setEmail(alumnoDTO.getEmail());
@@ -46,6 +57,7 @@ public class AlumnoConverter {
         alumno.setFechaDeNacimiento(alumnoDTO.getFechaDeNacimiento());
         alumno.setHistoria(alumnoDTO.getHistoria());
         alumno.setCursos(cursoConverter.fromDTO(alumnoDTO.getCursos()));
+        converting = false;
         return alumno;
     }
     

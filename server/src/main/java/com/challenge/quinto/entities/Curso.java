@@ -5,6 +5,7 @@
 package com.challenge.quinto.entities;
 
 import com.challenge.quinto.enums.Turno;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -43,7 +44,8 @@ public class Curso {
     
     private String horario;
     
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cursos", fetch = FetchType.EAGER)
+    @ManyToMany( mappedBy = "cursos", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Alumno> alumnos;
 
 }

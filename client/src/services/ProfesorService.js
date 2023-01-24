@@ -29,6 +29,11 @@ export async function getProfesorById(idProfesor){
     return res.data;
 }
 
+export async function getProfesorByName(name){
+    const res = await axios.get(`${API_PROFESORES}/search?nombre=${name}`)
+    return res.data;
+}
+
 export async function updateProfesor(idProfesor,profesor){
     const res = await axios.put(`${API_PROFESORES}/${idProfesor}`,profesor,BASE_HEADERS)
     console.log(res);

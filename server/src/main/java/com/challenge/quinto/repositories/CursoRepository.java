@@ -21,7 +21,7 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
     @Query("SELECT c FROM Curso c WHERE c.nombre LIKE :nombre%")
     public List<Curso> getCursosByNombre(@Param("nombre") String nombre);
 
-    @Query("SELECT c FROM Curso c WHERE c.id NOT IN (SELECT a.cursos FROM Alumno a WHERE a.id = :idAlumno)")
+    @Query("SELECT c FROM Curso c WHERE NOT EXISTS (SELECT a FROM Alumno a JOIN a.cursos ac WHERE a.id = :idAlumno and ac.id = c.id)")
     public List<Curso> getCursosWhereAlumnoNotIn(@Param("idAlumno") Integer idAlumno);
 
     @Query("SELECT c FROM Curso c WHERE c.profesor.id != :idProfesor")
