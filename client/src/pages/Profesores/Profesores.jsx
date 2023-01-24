@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { getProfesorByName } from '../../services/ProfesorService';
 import "./profesores.scss"
 
 export default function Profesores() {
@@ -7,8 +8,7 @@ export default function Profesores() {
     const [profesoresByName, setProfesoresByName] = useState([])
 
     async function handleClickSearch() {
-        const res = //await getAlumnosByName(inputNameProfesor.current.value)
-            console.log(res);
+        const res = await getProfesorByName(inputNameProfesor.current.value)
         setProfesoresByName(res)
     }
     return (
@@ -21,8 +21,8 @@ export default function Profesores() {
                 <div className='list'>
                     Profesores
                     {profesoresByName.map((profesor, i) =>
-                        <Link to={`/profesor/${profesor.id}`}>
-                            <p key={i}>
+                        <Link key={i} to={`/profesor/${profesor.id}`}>
+                            <p >
                                 <span>{profesor.nombre}</span> <span>{profesor.email}</span>
                             </p>
                         </Link>

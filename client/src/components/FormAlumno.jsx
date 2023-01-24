@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import { saveAlumno } from '../services/AlumnoService'
 
 export default function FormAlumno() {
 
   const [error, setError] = useState(false)
-  const navigate =useNavigate()
+  const navigate = useNavigate()
 
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -23,23 +24,24 @@ export default function FormAlumno() {
       edad: ageRef.current.value,
       fechaDeNacimiento: dateRef.current.value,
       historia: descriptionRef.current.value,
-      cursos:[]
+      cursos: []
     }
     console.log(alumno);
     const res = await saveAlumno(alumno)
-    if (res.data) {
+    if (res) {
       navigate("/login")
     } else {
       setError(true)
       setTimeout(() => {
         setError(false)
       }, 5000)
-      
+
     }
   }
 
   return (
-    <>
+    <div className='registro'>
+      <h3>Registro Alumno</h3>
       <form className='form-alumno' onSubmit={(e) => handleSaveAlumno(e)}>
         <input type="email" ref={emailRef} placeholder='example@example.com' />
         <input type="password" ref={passwordRef} placeholder='Password' />
@@ -50,6 +52,7 @@ export default function FormAlumno() {
         <button type='submit'>Register</button>
       </form>
       {error && <span>Hubo un error al registrarse</span>}
-    </>
+      <span>Tenes una cuenta <Link to={"/login"}>Login</Link></span>
+    </div>
   )
 }

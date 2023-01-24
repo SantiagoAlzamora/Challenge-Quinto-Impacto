@@ -9,6 +9,12 @@ import Alumnos from './pages/Alumnos/Alumnos';
 import PerfilAlumno from './pages/Alumnos/PerfilAlumno';
 import Header from './components/Header'
 import Profesores from './pages/Profesores/Profesores';
+import Cursos from './pages/Cursos/Cursos';
+import PerfilProfesor from './pages/Profesores/PerfilProfesor'
+import Curso from './pages/Cursos/Curso';
+import FormCurso from './components/FormCurso';
+import CursosAlumno from './pages/Alumnos/CursosAlumno';
+import CursosProfesor from './pages/Profesores/CursosProfesor';
 
 
 function ProtectedRoute({ children }) {
@@ -47,12 +53,32 @@ const router = createBrowserRouter([
         element: <Alumnos />
       },
       {
+        path:"/alumno/add-cursos/:id",
+        element: <CursosAlumno />
+      },
+      {
         path:"/profesor/:id",
-        element: <Layout></Layout>
+        element: <PerfilProfesor />
       },
       {
         path:"/profesor",
         element: <Profesores />
+      },
+      {
+        path:"/profesor/add-cursos/:id",
+        element: <CursosProfesor />
+      },
+      {
+        path:"/curso/:id",
+        element: <Curso/>
+      },
+      {
+        path:"/curso",
+        element: <Cursos />
+      },
+      {
+        path:"/curso/crear",
+        element: <FormCurso />
       }
     ]
   },

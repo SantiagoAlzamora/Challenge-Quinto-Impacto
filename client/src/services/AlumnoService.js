@@ -6,22 +6,22 @@ const API_ALUMNOS = `${API_URL}/alumnos`
 
 export async function saveAlumno(alumno){
     const res = await axios.post(`${API_ALUMNOS}`,alumno,BASE_HEADERS)
-    return res
+    return res.data
 }
 
 export async function addCursosAlumno(idAlumno,cursos){
     const res = await axios.patch(`${API_ALUMNOS}/${idAlumno}`,cursos,BASE_HEADERS)
-    console.log(res);
+    return res.data
 }
 
 export async function getAlumnosFromCurso(idCurso){
     const res = await axios.get(`${API_URL}/cursos/${idCurso}`)
-    return res;
+    return res.data
 }
 
 export async function getAllAlumnos(){
     const res = await axios.get(API_ALUMNOS)
-    console.log(res);
+    return res.data
 }
 
 export async function getAlumnoById(idAlumno){
@@ -31,7 +31,7 @@ export async function getAlumnoById(idAlumno){
 
 export async function updateAlumno(idAlumno,alumno){
     const res = await axios.put(`${API_ALUMNOS}/${idAlumno}`,alumno,BASE_HEADERS)
-    console.log(res);
+    return res.data
 }
 
 export async function getAlumnosByName(name){
