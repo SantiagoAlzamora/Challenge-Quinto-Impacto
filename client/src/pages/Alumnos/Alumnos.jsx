@@ -10,7 +10,6 @@ export default function Alumnos() {
 
   async function handleClickSearch() {
     const res = await getAlumnosByName(inputNameAlumno.current.value)
-    console.log(res);
     setAlumnosByName(res)
   }
   return (
@@ -23,8 +22,8 @@ export default function Alumnos() {
         <div className='list'>
           Alumnos
           {alumnosByName.map((alumno, i) =>
-            <Link to={`/alumno/${alumno.id}`}>
-              <p key={i}>
+            <Link key={i} to={`/alumno/${alumno.id}`}>
+              <p >
                 <span>{alumno.nombre}</span> <span>{alumno.email}</span>
               </p>
             </Link>

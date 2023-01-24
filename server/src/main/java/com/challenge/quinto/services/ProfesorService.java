@@ -11,6 +11,7 @@ import com.challenge.quinto.entities.dtos.ProfesorDTO;
 import com.challenge.quinto.repositories.ProfesorRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +57,7 @@ public class ProfesorService {
     
     @Transactional
     public ProfesorDTO createProfesor(ProfesorDTO profesorDTO) {
+        profesorDTO.setPassword(new BCryptPasswordEncoder().encode(profesorDTO.getPassword()));
         Profesor profesor = profesorConverter.fromDTO(profesorDTO);
         profesor = profesorRepository.save(profesor);
         return profesorConverter.toDTO(profesor);
@@ -65,6 +67,7 @@ public class ProfesorService {
     public ProfesorDTO updateProfesor(Integer id, ProfesorDTO profesorDTO) {
         Profesor profesor = profesorRepository.findById(id).orElse(null);
         if (profesor != null) {
+            profesorDTO.setPassword(new BCryptPasswordEncoder().encode(profesorDTO.getPassword()));
             profesor = profesorConverter.fromDTO(profesorDTO);
             profesor.setId(id);
             profesor = profesorRepository.save(profesor);

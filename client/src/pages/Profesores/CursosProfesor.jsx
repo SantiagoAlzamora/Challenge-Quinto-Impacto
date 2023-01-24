@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { addCursosAlumno, getAlumnoById } from '../../services/AlumnoService';
-import { getCursosWhereAlumnoNotIn } from '../../services/CursoService';
-import "./perfilAlumno.scss"
+import { getCursosWhereProfesorNotIn } from '../../services/CursoService';
+import { addCursosProfesor, getProfesorById } from '../../services/ProfesorService';
+import "./perfilProfesor.scss"
 
-export default function CursosAlumno() {
+export default function CursosProfesor() {
     const { id } = useParams();
-    const [alumno, setAlumno] = useState({})
+    const [profesor, setProfesor] = useState({})
     const [cursosToShow, setCursosToShow] = useState([])
     const [cursosToAdd, setCursosToAdd] = useState([])
 
     useEffect(() => {
-        getAlumnoById(id).then(res => setAlumno(res))
-        getCursosWhereAlumnoNotIn(id).then(res => setCursosToShow(res))
+        getProfesorById(id).then(res => setProfesor(res))
+        getCursosWhereProfesorNotIn(id).then(res => setCursosToShow(res))
     }, [id])
 
     function selectCurso(curso) {
@@ -24,7 +24,7 @@ export default function CursosAlumno() {
         }
     }
     async function enviarCursos(){
-        const res = await addCursosAlumno(id,cursosToAdd)
+        const res = await addCursosProfesor(id,cursosToAdd)
         console.log(res);
     }
     return (
@@ -33,11 +33,9 @@ export default function CursosAlumno() {
             <div className='perfil-alumno'>
 
                 <section className='info'>
-                    <span>Nombre: {alumno.nombre}</span>
-                    <span>Edad: {alumno.edad}</span>
-                    <span>Nacimiento: {new Date(alumno.fechaDeNacimiento + 100000000).toLocaleDateString()}</span>
-                    <span>Email: {alumno.email}</span>
-                    <span>Historia: {alumno.historia}</span>
+                    <span>Nombre: {profesor.nombre}</span>
+                    <span>Edad: {profesor.apellido}</span>
+                    <span>Email: {profesor.email}</span>
                 </section>
                 <section className='cursos'>
                     {

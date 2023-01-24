@@ -14,7 +14,7 @@ export default function Header() {
         <div className='header'>
             <Link to={"/"}>Home</Link>
             <Link to={"/login"}>{user ? <span onClick={logout}>logout</span> : <span>login</span>}</Link>
-            <Link to={""}>Register</Link>
+            <Link to={"/register"}>Register</Link>
             <Link to={user.role ==="ALUMNO" ? `/alumno/${user.id}`: user.role ==="PROFESOR" ? `/profesor/${user.id}`:""}>{user.email}</Link>
         </div>
     )

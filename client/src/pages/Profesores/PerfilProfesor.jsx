@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getProfesorById } from '../../services/ProfesorService';
 import "./perfilProfesor.scss"
 
@@ -20,10 +20,12 @@ export default function PerfilProfesor() {
             </section>
             <section className='cursos'>
                 {
-                    profesor.cursos.length > 0 ? profesor.cursos.map((curso,i)=> <p key={i}>{curso.nombre}</p>)
-                    : <p>No esta dictando ningun curso</p>
+                    profesor.cursos?.length > 0 ? profesor.cursos.map((curso,i)=> <p key={i}>{curso.nombre}</p>)
+                    : <Link className='add-cursos-link' to={`/profesor/add-cursos/${id}`}>Inscribirse a cursos</Link>
                 }
             </section>
+
+            {profesor.cursos?.length > 0 && <Link className='add-cursos-link' to={`/profesor/add-cursos/${id}`}>Inscribirse a cursos</Link>}
 
         </div>
     )

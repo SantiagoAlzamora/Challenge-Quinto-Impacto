@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
@@ -6,6 +6,8 @@ import { loginUser } from '../../services/UserService'
 import "./login.scss"
 
 export default function Login() {
+
+  const [error, setError] = useState(false)
 
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -31,6 +33,10 @@ export default function Login() {
       navigate("/")
     } catch (error) {
       console.log(error);
+      setError(true)
+      setTimeout(()=>{
+        setError(false)
+      },5000)
     }
 
   }
@@ -44,6 +50,7 @@ export default function Login() {
           <input type="password" ref={passwordRef} placeholder='password' />
           <button type='submit'>Login</button>
         </form>
+        {error && <span>Email o contraseña incorrectos</span>}
         <span>No tenes una cuenta <Link to={"/register"}>Register</Link></span>
       </div>
     </div>

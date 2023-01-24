@@ -28,12 +28,12 @@ export default function PerfilAlumno() {
                 </section>
                 <section className='cursos'>
                     {
-                        alumno.cursos?.length > 0 ? alumno.cursos.map((curso, i) => <p key={i}>{curso.nombre}</p>)
-                            : <Link to={`/alumno/add-cursos/${id}`}>Inscribirse a cursos</Link>
+                        alumno.cursos?.length > 0 ? alumno.cursos.map((curso, i) => <span className='span' key={i}>{curso.nombre}</span>)
+                            : <Link className='add-cursos-link' to={`/alumno/add-cursos/${id}`}>Inscribirse a cursos</Link>
                     }
                 </section>
             </div>
-            {alumno.cursos?.length > 0 && <Link to={`/alumno/add-cursos/${id}`}>Inscribirse a cursos</Link>}
+            {alumno.cursos?.length > 0 && <Link className='add-cursos-link' to={`/alumno/add-cursos/${id}`}>Inscribirse a cursos</Link>}
         </div>
     )
 }

@@ -26,6 +26,7 @@ export default function FormProfesor() {
             await saveProfesor(profesor)
             navigate("/login")
         } catch (error) {
+            console.log(error);
             setError(true)
             setTimeout(() => {
                 setError(false)
@@ -37,10 +38,10 @@ export default function FormProfesor() {
         <div className='registro-profesor'>
             <h3>Registro Profesor</h3>
             <form className='form-profesor' onSubmit={handleSaveProfesor}>
-                <input type="email" placeholder='example@example.com' />
-                <input type="password" placeholder='Password' />
-                <input type="text" placeholder='Name' />
-                <input type="text" placeholder='Lastname' />
+                <input type="email" ref={emailRef} placeholder='example@example.com' />
+                <input type="password" ref={passwordRef} placeholder='Password' />
+                <input type="text" ref={nameRef} placeholder='Name' />
+                <input type="text" ref={lastNameRef} placeholder='Lastname' />
                 <button type='submit'>Register</button>
             </form>
             {error && <span>Hubo un error al registrarse</span>}

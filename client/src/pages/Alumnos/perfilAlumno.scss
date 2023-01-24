@@ -1,11 +1,12 @@
-.perfil-alumno{
+.perfil-alumno {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 80%;
     height: 80vh;
     margin: auto;
-    .info{
+
+    .info {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -16,7 +17,8 @@
         background-color: white;
         border-radius: 1rem;
     }
-    .cursos{
+
+    .cursos {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -27,12 +29,42 @@
         border-radius: 1rem;
         overflow-y: scroll;
         background-color: white;
-        &::-webkit-scrollbar{
+
+        &::-webkit-scrollbar {
             display: none;
         }
     }
 }
 
-.selected{
+.add-cursos-link {
+    background-color: #7b96ec;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 10px;
+    text-decoration: none;
+}
+
+button {
+    background-color: #7b96ec;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.span {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    padding: 1rem;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+.selected {
     background-color: greenyellow;
 }
