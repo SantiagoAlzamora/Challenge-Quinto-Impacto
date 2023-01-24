@@ -39,8 +39,8 @@ public class CursoService {
     }
     
     @Transactional(readOnly = true)
-    public List<CursoDTO> getCursosWhereProfesorNotIn(Integer id) {
-        List<Curso> cursos = cursoRepository.getCursosWhereProfesorNotIn(id);
+    public List<CursoDTO> getCursosWhereProfesorNotIn() {
+        List<Curso> cursos = cursoRepository.getCursosWhereProfesorNotIn();
         return cursoConverter.toDTO(cursos);
     }
 

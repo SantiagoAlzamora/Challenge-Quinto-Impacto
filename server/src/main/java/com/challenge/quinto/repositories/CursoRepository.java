@@ -24,6 +24,6 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
     @Query("SELECT c FROM Curso c WHERE c.id NOT IN (SELECT a.cursos FROM Alumno a WHERE a.id = :idAlumno)")
     public List<Curso> getCursosWhereAlumnoNotIn(@Param("idAlumno") Integer idAlumno);
 
-    @Query("SELECT c FROM Curso c WHERE c.profesor.id != :idProfesor")
-    public List<Curso> getCursosWhereProfesorNotIn(@Param("idProfesor") Integer idProfesor);
+    @Query("SELECT c FROM Curso c WHERE c.profesor = null")
+    public List<Curso> getCursosWhereProfesorNotIn();
 }
