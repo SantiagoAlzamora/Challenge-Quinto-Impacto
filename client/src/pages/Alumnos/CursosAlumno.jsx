@@ -40,6 +40,7 @@ export default function CursosAlumno() {
                     <span>Historia: {alumno.historia}</span>
                 </section>
                 <section className='cursos'>
+                    <h3>Cursos</h3>
                     {
                         cursosToShow.length > 0 && cursosToShow.map((e, i) =>
                             <CursoAux key={i} curso={e} selectCurso={selectCurso} />
