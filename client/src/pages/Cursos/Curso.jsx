@@ -4,28 +4,33 @@ import { getCursoById } from '../../services/CursoService';
 import "./curso.scss"
 
 export default function Curso() {
-  const {id} = useParams();
-    const [curso,setCurso] = useState({})
+    const { id } = useParams();
+    const [curso, setCurso] = useState({})
 
-    useEffect(()=>{
+    useEffect(() => {
         getCursoById(id).then(res => setCurso(res))
-    },[id])
+    }, [id])
     return (
-        <div className='curso'>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div className='curso'>
 
-            <section className='info'>
-                <span>Nombre: {curso.nombre}</span>
-                <span>turno: {curso.turno}</span>
-                <span>Horario: {curso.horario}</span>
-            </section>
-            <section className='alumnos'>
-              <p>Profesor : {curso.profesor ?  curso.profesor.nombre : "Este curso no tiene profesor"}</p>
-                {
-                    curso.alumnos?.length > 0 ? curso.alumnos.map((alumno,i)=> <p key={i}>{alumno.nombre}</p>)
-                    : <p>El curso no tiene alumnos inscriptos</p>
-                }
-            </section>
+                <section className='info'>
+                    <span>Nombre: {curso.nombre}</span>
+                    <span>turno: {curso.turno}</span>
+                    <span>Horario: {curso.horario}</span>
+                </section>
+                <div className='integrantes'>
+                    <p>Profesor : {curso.profesor ? curso.profesor.nombre : "Este curso no tiene profesor"}</p>
+                    <section className='alumnos'>
+                    <h4>Alumnos</h4>
+                        {
+                            curso.alumnos?.length > 0 ? curso.alumnos.map((alumno, i) => <span className='span' key={i}>{alumno.nombre}</span>)
+                                : <p>El curso no tiene alumnos inscriptos</p>
+                        }
+                    </section>
+                </div>
 
+            </div>
         </div>
     )
 }

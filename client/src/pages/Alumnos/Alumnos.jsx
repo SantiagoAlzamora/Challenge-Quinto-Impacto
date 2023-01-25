@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getAlumnosByName } from '../../services/AlumnoService'
+import { getAllAlumnos, getAlumnosByName } from '../../services/AlumnoService'
 import "./alumnos.scss"
 
 export default function Alumnos() {
@@ -12,6 +12,11 @@ export default function Alumnos() {
     const res = await getAlumnosByName(inputNameAlumno.current.value)
     setAlumnosByName(res)
   }
+
+  useEffect(()=>{
+    getAllAlumnos().then(res=>setAlumnosByName(res))
+  },[])
+
   return (
     <div className='alumnos'>
       <div className='search'>

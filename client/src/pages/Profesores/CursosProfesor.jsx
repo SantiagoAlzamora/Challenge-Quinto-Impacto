@@ -25,12 +25,12 @@ export default function CursosProfesor() {
     }
     async function enviarCursos(){
         const res = await addCursosProfesor(id,cursosToAdd)
-        console.log(res);
+        setCursosToShow(await getCursosWhereProfesorNotIn(id))
     }
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 
-            <div className='perfil-alumno'>
+            <div className='perfil-profesor'>
 
                 <section className='info'>
                     <span>Nombre: {profesor.nombre}</span>

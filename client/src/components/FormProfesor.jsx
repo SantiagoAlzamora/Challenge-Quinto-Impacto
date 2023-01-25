@@ -44,7 +44,7 @@ export default function FormProfesor() {
                 <input type="text" ref={lastNameRef} placeholder='Lastname' />
                 <button type='submit'>Register</button>
             </form>
-            {error && <span>Hubo un error al registrarse</span>}
+            {error && <span style={{color:'red'}}>Hubo un error al registrarse</span>}
             <span>Tenes una cuenta <Link to={"/login"}>Login</Link></span>
         </div>
     )

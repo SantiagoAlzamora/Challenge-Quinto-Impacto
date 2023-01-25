@@ -25,7 +25,7 @@ export default function CursosAlumno() {
     }
     async function enviarCursos(){
         const res = await addCursosAlumno(id,cursosToAdd)
-        console.log(res);
+        setCursosToShow(await getCursosWhereAlumnoNotIn(id))
     }
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

@@ -30,7 +30,7 @@ public class AlumnoService {
 
     @Transactional(readOnly = true)
     public List<AlumnoDTO> getAllAlumnos() {
-        List<Alumno> alumnos = alumnoRepository.findAll();
+        List<Alumno> alumnos = alumnoRepository.getAlumnos();
         return alumnoConverter.toDTO(alumnos);
     }
 

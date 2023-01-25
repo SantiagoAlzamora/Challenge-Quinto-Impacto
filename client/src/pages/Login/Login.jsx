@@ -50,7 +50,7 @@ export default function Login() {
           <input type="password" ref={passwordRef} placeholder='password' />
           <button type='submit'>Login</button>
         </form>
-        {error && <span>Email o contraseña incorrectos</span>}
+        {error && <span style={{color:'red'}}>Email o contraseña incorrectos</span>}
         <span>No tenes una cuenta <Link to={"/register"}>Register</Link></span>
       </div>
     </div>

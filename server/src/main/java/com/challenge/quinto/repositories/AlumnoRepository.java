@@ -24,4 +24,7 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
     @Query("SELECT a FROM Alumno a WHERE a.nombre LIKE :nombre%")
     public List<Alumno> getAlumnoByNombre(@Param("nombre") String nombre);
     
+    @Query("SELECT a FROM Alumno a WHERE a.role LIKE 'ALUMNO'")
+    public List<Alumno> getAlumnos();
+    
 }

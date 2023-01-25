@@ -10,7 +10,7 @@ export default function Home() {
       <Link to={"/alumno"}><article>Buscar Alumno </article></Link>
       <Link to={"/profesor"}><article>Buscar Profesor</article></Link>
       <Link to={"/curso"}><article>Buscar Curso</article></Link>
-      {data.user.role === "ADMIN" && <Link><article>Admin Dashboard</article></Link>}
+      {data.user.role === "ADMIN" && <Link to={"/admin"}><article>Admin Dashboard</article></Link>}
     </div>
   )
 }

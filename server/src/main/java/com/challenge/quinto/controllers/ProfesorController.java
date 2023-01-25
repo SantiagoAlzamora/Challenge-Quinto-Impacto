@@ -50,6 +50,16 @@ public class ProfesorController {
             return ResponseEntity.status(400).body(null);
         }   
     }
+    
+    @PatchMapping("/{idProfesor}/{idCurso}")
+    public ResponseEntity<ProfesorDTO> deleteCursoFromProfesor(@PathVariable Integer idProfesor, @PathVariable Integer idCurso){
+        try {
+            return ResponseEntity.status(200).body(profesorService.deleteCursoFromProfesor(idProfesor, idCurso));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(400).body(null);
+        } 
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProfesorDTO> getProfesorById(@PathVariable Integer id) {
