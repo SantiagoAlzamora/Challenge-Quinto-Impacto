@@ -21,4 +21,7 @@ public interface ProfesorRepository extends JpaRepository<Profesor,Integer>{
     @Query("SELECT p FROM Profesor p WHERE p.nombre LIKE :nombre%")
     public List<Profesor> getProfesoresByNombre(@Param("nombre") String nombre);
     
+    @Query("SELECT p FROM Profesor p WHERE p.role LIKE 'PROFESOR'")
+    public List<Profesor> getProfesores();
+    
 }

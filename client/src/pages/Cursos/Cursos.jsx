@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { getCursosByName } from '../../services/CursoService';
+import { getAllCursos, getCursosByName } from '../../services/CursoService';
 import "./cursos.scss"
 export default function Cursos() {
     const inputNameCurso = useRef()
@@ -10,6 +10,11 @@ export default function Cursos() {
       const res = await getCursosByName(inputNameCurso.current.value)
       setCursosByName(res)
     }
+
+    useEffect(()=>{
+      getAllCursos().then(res=>setCursosByName(res))
+    },[])
+    
     return (
       <div className='cursos'>
         <div className='search'>

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { getProfesorByName } from '../../services/ProfesorService';
+import { getAllProfesores, getProfesorByName } from '../../services/ProfesorService';
 import "./profesores.scss"
 
 export default function Profesores() {
@@ -11,6 +11,10 @@ export default function Profesores() {
         const res = await getProfesorByName(inputNameProfesor.current.value)
         setProfesoresByName(res)
     }
+
+    useEffect(()=>{
+        getAllProfesores().then(res=>setProfesoresByName(res))
+      },[])
     return (
         <div className='profesores'>
             <div className='search'>

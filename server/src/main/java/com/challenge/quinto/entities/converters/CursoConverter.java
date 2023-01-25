@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 @Component("CursoConverter")
 public class CursoConverter {
     
+    private boolean converting = false;
+    
     @Autowired
     private ProfesorConverter profesorConverter;
     
@@ -25,6 +27,10 @@ public class CursoConverter {
     private AlumnoConverter alumnoConverter;
     
     public CursoDTO toDTO(Curso curso) {
+        if(converting){
+            return null;
+        }
+        converting= true;
         CursoDTO cursoDTO = new CursoDTO();
         cursoDTO.setId(curso.getId());
         cursoDTO.setNombre(curso.getNombre());
@@ -36,9 +42,14 @@ public class CursoConverter {
         cursoDTO.setTurno(curso.getTurno());
         cursoDTO.setHorario(curso.getHorario());
         cursoDTO.setAlumnos(alumnoConverter.toDTO(curso.getAlumnos()));
+        converting = false;
         return cursoDTO;
     }
     public Curso fromDTO(CursoDTO cursoDTO) {
+        if(converting){
+            return null;
+        }
+        converting= true;
         Curso curso = new Curso();
         curso.setId(cursoDTO.getId());
         curso.setNombre(cursoDTO.getNombre());
@@ -50,6 +61,7 @@ public class CursoConverter {
         curso.setTurno(cursoDTO.getTurno());
         curso.setHorario(cursoDTO.getHorario());
         curso.setAlumnos(alumnoConverter.fromDTO(cursoDTO.getAlumnos()));
+        converting = false;
         return curso;
     }
     

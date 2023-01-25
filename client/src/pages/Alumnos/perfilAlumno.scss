@@ -22,7 +22,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         width: 40%;
         height: 50%;
         gap: 1rem;
@@ -44,6 +43,9 @@
     font-weight: 700;
     padding: 10px;
     text-decoration: none;
+    &:hover{
+        background-color: #6c8bf0;
+    }
 }
 
 button {
@@ -53,6 +55,9 @@ button {
     cursor: pointer;
     font-weight: 700;
     padding: 10px;
+    &:hover{
+        background-color: #6c8bf0;
+    }
 }
 
 .span {

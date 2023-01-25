@@ -9,6 +9,12 @@ export async function saveProfesor(profesor){
     return res.data;
 }
 
+export async function removeCursoToProfesor(idProfesor,idCurso){
+    const res = await axios.patch(`${API_PROFESORES}/${idProfesor}/${idCurso}`)
+    return res.data
+
+}
+
 export async function addCursosProfesor(idProfesor,cursos){
     const res = await axios.patch(`${API_PROFESORES}/${idProfesor}`,cursos,BASE_HEADERS)
     return res.data;

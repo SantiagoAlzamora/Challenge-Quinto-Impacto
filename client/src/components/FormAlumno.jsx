@@ -51,7 +51,7 @@ export default function FormAlumno() {
         <textarea placeholder='Description...' ref={descriptionRef}></textarea>
         <button type='submit'>Register</button>
       </form>
-      {error && <span>Hubo un error al registrarse</span>}
+      {error && <span style={{color:'red'}}>Hubo un error al registrarse</span>}
       <span>Tenes una cuenta <Link to={"/login"}>Login</Link></span>
     </div>
   )

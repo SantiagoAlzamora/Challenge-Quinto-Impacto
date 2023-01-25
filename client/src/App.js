@@ -15,6 +15,7 @@ import Curso from './pages/Cursos/Curso';
 import FormCurso from './components/FormCurso';
 import CursosAlumno from './pages/Alumnos/CursosAlumno';
 import CursosProfesor from './pages/Profesores/CursosProfesor';
+import Admin from './pages/Admin/Admin';
 
 
 function ProtectedRoute({ children }) {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path:"/curso/crear",
         element: <FormCurso />
+      },
+      {
+        path:"/admin",
+        element:<Admin/>
       }
     ]
   },
