@@ -23,12 +23,10 @@ export default function Profesores() {
             </div>
             {profesoresByName.length > 0 &&
                 <div className='list'>
-                    Profesores
+                    <h3>Profesores</h3>
                     {profesoresByName.map((profesor, i) =>
                         <Link key={i} to={`/profesor/${profesor.id}`}>
-                            <p >
                                 <span>{profesor.nombre}</span> <span>{profesor.email}</span>
-                            </p>
                         </Link>
                     )}
                 </div>

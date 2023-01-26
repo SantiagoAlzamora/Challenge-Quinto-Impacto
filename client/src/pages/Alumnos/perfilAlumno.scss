@@ -72,10 +72,12 @@ button {
     }
 }
 
-.span {
+.link-to {
     width: 80%;
     display: flex;
     justify-content: space-between;
+    text-decoration: none;
+    color: black;
     font-weight: 400;
     padding: 1rem;
     border: 1px solid lightgrey;

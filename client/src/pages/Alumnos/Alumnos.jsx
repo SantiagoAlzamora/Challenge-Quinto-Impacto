@@ -13,9 +13,9 @@ export default function Alumnos() {
     setAlumnosByName(res)
   }
 
-  useEffect(()=>{
-    getAllAlumnos().then(res=>setAlumnosByName(res))
-  },[])
+  useEffect(() => {
+    getAllAlumnos().then(res => setAlumnosByName(res))
+  }, [])
 
   return (
     <div className='alumnos'>
@@ -25,17 +25,17 @@ export default function Alumnos() {
       </div>
       {alumnosByName.length > 0 &&
         <div className='list'>
-          Alumnos
+          <h3>Alumnos</h3>
           {alumnosByName.map((alumno, i) =>
             <Link key={i} to={`/alumno/${alumno.id}`}>
-              <p >
-                <span>{alumno.nombre}</span> <span>{alumno.email}</span>
-              </p>
+
+              <span>{alumno.nombre}</span> <span>{alumno.email}</span>
+
             </Link>
           )}
         </div>
       }
-      
+
     </div>
   )
 }

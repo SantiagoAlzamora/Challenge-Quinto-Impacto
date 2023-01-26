@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import { addCursosAlumno, getAlumnoById } from '../../services/AlumnoService';
 import { getCursosWhereAlumnoNotIn } from '../../services/CursoService';
 import "./perfilAlumno.scss"
@@ -9,6 +10,17 @@ export default function CursosAlumno() {
     const [alumno, setAlumno] = useState({})
     const [cursosToShow, setCursosToShow] = useState([])
     const [cursosToAdd, setCursosToAdd] = useState([])
+
+    const {data} = useContext(AuthContext)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if(data.user.role === 'PROFESOR'){
+            navigate("/")
+        }
+        if(data.user.role === 'ALUMNO' && data.user.id !== parseInt(id)){
+            navigate("/")
+        }
+    })
 
     useEffect(() => {
         getAlumnoById(id).then(res => setAlumno(res))

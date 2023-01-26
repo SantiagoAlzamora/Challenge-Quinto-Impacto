@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import { getCursosWhereProfesorNotIn } from '../../services/CursoService';
 import { addCursosProfesor, getProfesorById } from '../../services/ProfesorService';
 import "./perfilProfesor.scss"
@@ -9,6 +10,17 @@ export default function CursosProfesor() {
     const [profesor, setProfesor] = useState({})
     const [cursosToShow, setCursosToShow] = useState([])
     const [cursosToAdd, setCursosToAdd] = useState([])
+
+    const {data} = useContext(AuthContext)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if(data.user.role === 'ALUMNO'){
+            navigate("/")
+        }
+        if(data.user.role === 'PROFESOR' && data.user.id !== parseInt(id)){
+            navigate("/")
+        }
+    })
 
     useEffect(() => {
         getProfesorById(id).then(res => setProfesor(res))
@@ -56,7 +68,7 @@ function CursoAux({ curso, selectCurso }) {
     const [selected, setSelected] = useState(false)
 
     return (
-        <span className={selected ? "span selected" : "span"} onClick={() => {
+        <span className={selected ? "link-to selected" : "link-to"} onClick={() => {
             selectCurso(curso)
             setSelected(!selected)
         }}>{curso.nombre}</span>
