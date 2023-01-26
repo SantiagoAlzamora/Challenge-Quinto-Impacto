@@ -21,9 +21,9 @@ Para crear cursos necesitamos tener el usuario ADMIN generado como dice arriba.
 
 ### Requisitos para ejecutar el proyecto
 
-[] MySQL (schema: escuela)
-[] Java 8
-[] Node para poder ejecutar la parte del front
+- MySQL (schema: escuela)
+- Java 8
+- Node para poder ejecutar la parte del front
 
 Cliente:
 - Node (npm)
