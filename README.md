@@ -2,6 +2,7 @@
 ### Santiago Alzamora
 El proyecto se basa en una aplicacion para una universidad donde tenemos alumnos, profesores y cursos. Tenemos 3 ROLES: Admin, Alumno, Profesor.
 `PARA EL ROL DEL ADMIN HAY QUE GENERAR UN PROFESOR Y CAMBIARLE EL ROL EN LA BASE DE DATOS A MANO`. 
+Para crear cursos necesitamos tener el usuario ADMIN generado como dice arriba.
 
 ### Caracteristicas
 
@@ -20,6 +21,7 @@ El proyecto se basa en una aplicacion para una universidad donde tenemos alumnos
 
 ### Requisitos para ejecutar el proyecto
 
+[ ] MySQL (schema: escuela)
 [ ] Java 8
 [ ] Node para poder ejecutar la parte del front
 
