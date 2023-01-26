@@ -34,7 +34,7 @@ public class Alumno extends Usuario {
     private Date fechaDeNacimiento;
     private String historia;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER)
     @JsonIgnore
     @JoinTable(name = "alumno_curso",
             joinColumns = @JoinColumn(name = "alumno_id"),

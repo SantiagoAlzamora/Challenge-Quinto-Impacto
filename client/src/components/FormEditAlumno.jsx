@@ -15,7 +15,6 @@ export default function FormAlumno() {
         getAlumnoById(id).then(res => setAlumno(res))
     },[id])
 
-    const emailRef = useRef()
     const passwordRef = useRef()
     const nameRef = useRef()
     const ageRef = useRef()
@@ -31,7 +30,7 @@ export default function FormAlumno() {
 
 
         const newAlumno = {
-            email: emailRef.current.value,
+            email: alumno.email,
             password: passwordRef.current.value,
             nombre: nameRef.current.value,
             edad: ageRef.current.value,
@@ -55,7 +54,6 @@ export default function FormAlumno() {
         <div className='modificar'>
             <h3>Modificar Alumno</h3>
             <form className='form-alumno'>
-                <input type="email" ref={emailRef} defaultValue={alumno?.email} placeholder='example@example.com' />
                 <input type="password" ref={passwordRef} placeholder='Password' />
                 <input type="text" ref={nameRef} defaultValue={alumno?.nombre} placeholder='Name' />
                 <input type="number" ref={ageRef} defaultValue={alumno?.edad} placeholder='Age' />

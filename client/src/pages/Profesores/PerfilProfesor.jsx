@@ -25,6 +25,7 @@ export default function PerfilProfesor() {
     useEffect(() => {
         getProfesorById(id).then(res => {
             setProfesor(res)
+            console.log(res)
             setCursos(res.cursos)
         })
     }, [id])
@@ -41,13 +42,15 @@ export default function PerfilProfesor() {
                 <section className='cursos'>
                     <h4>Cursos</h4>
                     {
-                        cursos?.length > 0 ? cursos.map((curso, i) => 
-                        <Link className='link-to' to={`/curso/${curso.id}`} key={i}>
-                            {curso.nombre} 
-                            {(data.user.id === parseInt(id)) | data.user.role === "ADMIN" ? 
-                            <i className='delete-curso-icon' onClick={() => removeCurso(curso)}>✖</i> 
-                            : ""}
-                        </Link>)
+                        cursos?.length > 0 ? cursos.map((curso, i) =>
+                            <div className='curso-info'>
+                                <Link className='link-to' to={`/curso/${curso.id}`} key={i}>
+                                    {curso.nombre}
+                                </Link>
+                                {(data.user.id === parseInt(id)) | data.user.role === "ADMIN" ?
+                                    <i className='delete-curso-icon' onClick={() => removeCurso(curso)}>✖</i>
+                                    : ""}
+                            </div>)
                             : (data.user.id === parseInt(id)) && <Link className='add-cursos-link' to={`/profesor/add-cursos/${id}`}>Inscribirse a cursos</Link>
                     }
                 </section>
