@@ -1,7 +1,16 @@
 # Challenge Quinto Impacto
 ### Santiago Alzamora
 El proyecto se basa en una aplicacion para una universidad donde tenemos alumnos, profesores y cursos. Tenemos 3 ROLES: Admin, Alumno, Profesor.
-`PARA EL ROL DEL ADMIN HAY QUE GENERAR UN PROFESOR Y CAMBIARLE EL ROL EN LA BASE DE DATOS A MANO`
+`PARA EL ROL DEL ADMIN HAY QUE GENERAR UN PROFESOR Y CAMBIARLE EL ROL EN LA BASE DE DATOS A MANO`. 
+
+### Caracteristicas
+
+- Registro y logueo de usuarios con sus roles especificos
+- Busqueda por nombres para alumnos, profesores y cursos
+- Pagina con mas detalles para cada entidad
+- Eliminar curso para profesor
+- Modificar datos para alumno
+- Admin dashboard para Agregar cursos y tener propio seguimiento de las entidades (Falta funcionalidad de eliminar)
 
 ### Tecnologias
 
