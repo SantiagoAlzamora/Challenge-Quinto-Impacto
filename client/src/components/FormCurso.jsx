@@ -1,4 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import { saveCurso } from '../services/CursoService';
 
 export default function FormCurso() {
@@ -8,6 +10,15 @@ export default function FormCurso() {
   const [loading, setLoading] = useState({
     error:false,
     success:false
+  })
+
+  const navigate = useNavigate()
+  const {data} = useContext(AuthContext) 
+
+  useEffect(()=>{
+    if (data.user.role !== 'ADMIN') {
+      navigate("/")
+    }
   })
 
   async function crearCurso(e) {

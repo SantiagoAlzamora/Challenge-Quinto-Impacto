@@ -41,13 +41,16 @@ export default function PerfilProfesor() {
                 <section className='cursos'>
                     <h4>Cursos</h4>
                     {
-                        cursos?.length > 0 ? cursos.map((curso, i) => <span className='span' key={i}>{curso.nombre} {(data.user.id === parseInt(id)) | data.user.role === "ADMIN" ? <i onClick={() => removeCurso(curso)}>✖</i> : ""}</span>)
+                        cursos?.length > 0 ? cursos.map((curso, i) => 
+                        <Link className='link-to' to={`/curso/${curso.id}`} key={i}>
+                            {curso.nombre} 
+                            {(data.user.id === parseInt(id)) | data.user.role === "ADMIN" ? 
+                            <i className='delete-curso-icon' onClick={() => removeCurso(curso)}>✖</i> 
+                            : ""}
+                        </Link>)
                             : (data.user.id === parseInt(id)) && <Link className='add-cursos-link' to={`/profesor/add-cursos/${id}`}>Inscribirse a cursos</Link>
                     }
                 </section>
-
-
-
             </div>
             {cursos?.length > 0 && (data.user.id === parseInt(id)) && <Link className='add-cursos-link' to={`/profesor/add-cursos/${id}`}>Inscribirse a cursos</Link>}
         </div>

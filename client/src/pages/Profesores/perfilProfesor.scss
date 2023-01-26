@@ -56,14 +56,24 @@ button {
     padding: 10px;
 }
 
-.span {
+.link-to {
     width: 80%;
     display: flex;
     justify-content: space-between;
+    text-decoration: none;
+    color: black;
     font-weight: 400;
     padding: 1rem;
     border: 1px solid lightgrey;
     border-radius: 10px;
+    .delete-curso-icon{
+        cursor: pointer;
+        transition: all .5s;
+        color: blueviolet;
+        &:hover{
+            transform: scale(120%);
+        }
+    }
 }
 
 .selected {

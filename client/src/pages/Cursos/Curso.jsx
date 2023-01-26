@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getCursoById } from '../../services/CursoService';
 import "./curso.scss"
 
@@ -20,11 +20,11 @@ export default function Curso() {
                     <span>Horario: {curso.horario}</span>
                 </section>
                 <div className='integrantes'>
-                    <p>Profesor : {curso.profesor ? curso.profesor.nombre : "Este curso no tiene profesor"}</p>
+                    <p>Profesor : {curso.profesor ? <Link style={{textDecoration:"none", color:"black"}} to={`/profesor/${curso.profesor.id}`}>{curso.profesor.nombre}</Link> : "Este curso no tiene profesor"}</p>
                     <section className='alumnos'>
                     <h4>Alumnos</h4>
                         {
-                            curso.alumnos?.length > 0 ? curso.alumnos.map((alumno, i) => <span className='span' key={i}>{alumno.nombre}</span>)
+                            curso.alumnos?.length > 0 ? curso.alumnos.map((alumno, i) => <Link to={`/alumno/${alumno.id}`} className='link-to' key={i}>{alumno.nombre}</Link>)
                                 : <p>El curso no tiene alumnos inscriptos</p>
                         }
                     </section>

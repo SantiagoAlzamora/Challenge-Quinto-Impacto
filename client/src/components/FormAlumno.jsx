@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { saveAlumno, updateAlumno } from '../services/AlumnoService'
 
-export default function FormAlumno({alumno}) {
+export default function FormAlumno({ alumno }) {
 
   const [error, setError] = useState(false)
   const navigate = useNavigate()
@@ -17,12 +17,15 @@ export default function FormAlumno({alumno}) {
 
   async function handleSaveAlumno(e) {
     e.preventDefault()
+
+    let date = new Date(dateRef.current.value)
+    date.setDate(date.getDate() + 1)
     const newAlumno = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       nombre: nameRef.current.value,
       edad: ageRef.current.value,
-      fechaDeNacimiento: dateRef.current.value,
+      fechaDeNacimiento: date,
       historia: descriptionRef.current.value,
       cursos: []
     }
@@ -39,7 +42,7 @@ export default function FormAlumno({alumno}) {
     }
   }
 
-  async function handleUpdateAlumno(e){
+  async function handleUpdateAlumno(e) {
     e.preventDefault()
     const newAlumno = {
       email: emailRef.current.value,
@@ -72,9 +75,9 @@ export default function FormAlumno({alumno}) {
         <input type="number" ref={ageRef} defaultValue={alumno?.edad} placeholder='Age' />
         <input type="date" ref={dateRef} defaultValue={alumno?.fechaDeNacimiento} />
         <textarea placeholder='Description...' ref={descriptionRef} defaultValue={alumno?.historia}></textarea>
-        {alumno ? <button onClick={(e) => handleUpdateAlumno(e)} type='submit'>Modificar</button>:<button onClick={(e) => handleSaveAlumno(e)} type='submit'>Register</button>}
+        {alumno ? <button onClick={(e) => handleUpdateAlumno(e)} type='submit'>Modificar</button> : <button onClick={(e) => handleSaveAlumno(e)} type='submit'>Register</button>}
       </form>
-      {error && <span style={{color:'red'}}>Hubo un error al registrarse</span>}
+      {error && <span style={{ color: 'red' }}>Hubo un error al registrarse</span>}
       <span>Tenes una cuenta <Link to={"/login"}>Login</Link></span>
     </div>
   )

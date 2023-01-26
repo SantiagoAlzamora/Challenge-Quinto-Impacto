@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Alumnos from '../Alumnos/Alumnos'
 import Profesores from '../Profesores/Profesores'
 import Cursos from '../Cursos/Cursos'
 import FormCurso from '../../components/FormCurso'
 import './admin.scss'
+import { AuthContext } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Admin() {
 
@@ -14,7 +16,15 @@ export default function Admin() {
     addCurso:false
   })
 
-  
+  const {data} = useContext(AuthContext)
+
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    if (data.user.role !== 'ADMIN') {
+      navigate("/")
+    }
+  })
 
   return (
     <div className='admin'>
