@@ -22,9 +22,10 @@ export default function PerfilAlumno() {
             <div className='perfil-alumno'>
 
                 <section className='info'>
+                    { parseInt(id) === data.user.id && <i className='icon-modificar'><Link to={`/alumno/update/${alumno.id}`}>✏</Link></i>}
                     <span>Nombre: {alumno.nombre}</span>
                     <span>Edad: {alumno.edad}</span>
-                    <span>Nacimiento: {new Date(alumno.fechaDeNacimiento + 100000000).toLocaleDateString()}</span>
+                    <span>Nacimiento: {new Date(alumno.fechaDeNacimiento).toLocaleDateString()}</span>
                     <span>Email: {alumno.email}</span>
                     <span>Historia: {alumno.historia}</span>
                 </section>
