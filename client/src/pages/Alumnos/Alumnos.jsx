@@ -14,7 +14,10 @@ export default function Alumnos() {
   }
 
   useEffect(() => {
-    getAllAlumnos().then(res => setAlumnosByName(res))
+    getAllAlumnos().then(res => {
+      setAlumnosByName(res)
+      console.log(res)
+    })
   }, [])
 
   return (

@@ -34,6 +34,20 @@
         &::-webkit-scrollbar {
             display: none;
         }
+        .curso-info{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            gap: 10px;
+            .delete-curso-icon{
+                cursor: pointer;
+                transition: all .5s;
+                color: blueviolet;
+                &:hover{
+                    transform: scale(120%);
+                }
+            }
+        }
     }
 }
 
@@ -66,14 +80,7 @@ button {
     padding: 1rem;
     border: 1px solid lightgrey;
     border-radius: 10px;
-    .delete-curso-icon{
-        cursor: pointer;
-        transition: all .5s;
-        color: blueviolet;
-        &:hover{
-            transform: scale(120%);
-        }
-    }
+    
 }
 
 .selected {
