@@ -32,7 +32,7 @@ export default function PerfilAlumno() {
                 <section className='cursos'>
                     <h4>Cursos</h4>
                     {
-                        alumno.cursos?.length > 0 ? alumno.cursos.map((curso, i) => <Link className='link-to' key={i}>{curso.nombre}</Link>)
+                        alumno.cursos?.length > 0 ? alumno.cursos.map((curso, i) => <Link className='link-to' to={`/curso/${curso.id}`} key={i}>{curso.nombre}</Link>)
                             : (data.user.id === parseInt(id)) && <Link className='add-cursos-link' to={`/alumno/add-cursos/${id}`}>Inscribirse a cursos</Link>
                     }
                 </section>

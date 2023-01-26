@@ -70,7 +70,7 @@ function CursoAux({ curso, selectCurso }) {
     const [selected, setSelected] = useState(false)
 
     return (
-        <span className={selected ? "span selected" : "span"} onClick={() => {
+        <span className={selected ? "link-to selected" : "link-to"} onClick={() => {
             selectCurso(curso)
             setSelected(!selected)
         }}>{curso.nombre}</span>
