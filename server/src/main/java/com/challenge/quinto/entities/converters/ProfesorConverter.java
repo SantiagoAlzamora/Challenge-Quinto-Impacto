@@ -33,7 +33,7 @@ public class ProfesorConverter {
         profesorDTO.setId(profesor.getId());
         profesorDTO.setEmail(profesor.getEmail());
         profesorDTO.setPassword(profesor.getPassword());
-        profesorDTO.setRole(Role.PROFESOR);
+        profesorDTO.setRole(profesor.getRole());
         profesorDTO.setNombre(profesor.getNombre());
         profesorDTO.setApellido(profesor.getApellido());
         profesorDTO.setCursos(cursoConverter.toDTO(profesor.getCursos()));
@@ -49,7 +49,7 @@ public class ProfesorConverter {
         profesor.setId(profesorDTO.getId());
         profesor.setEmail(profesorDTO.getEmail());
         profesor.setPassword(profesorDTO.getPassword());
-        profesor.setRole(Role.PROFESOR);
+        profesor.setRole(profesorDTO.getRole());
         profesor.setNombre(profesorDTO.getNombre());
         profesor.setApellido(profesorDTO.getApellido());
         profesor.setCursos(cursoConverter.fromDTO(profesorDTO.getCursos()));

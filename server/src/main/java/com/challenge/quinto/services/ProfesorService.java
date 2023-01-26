@@ -10,6 +10,7 @@ import com.challenge.quinto.entities.converters.CursoConverter;
 import com.challenge.quinto.entities.converters.ProfesorConverter;
 import com.challenge.quinto.entities.dtos.CursoDTO;
 import com.challenge.quinto.entities.dtos.ProfesorDTO;
+import com.challenge.quinto.enums.Role;
 import com.challenge.quinto.repositories.ProfesorRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,7 @@ public class ProfesorService {
     @Transactional
     public ProfesorDTO createProfesor(ProfesorDTO profesorDTO) {
         profesorDTO.setPassword(new BCryptPasswordEncoder().encode(profesorDTO.getPassword()));
+        profesorDTO.setRole(Role.PROFESOR);
         Profesor profesor = profesorConverter.fromDTO(profesorDTO);
         profesor = profesorRepository.save(profesor);
         return profesorConverter.toDTO(profesor);

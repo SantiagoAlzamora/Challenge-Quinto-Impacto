@@ -33,7 +33,7 @@ public class AlumnoConverter {
         alumnoDTO.setId(alumno.getId());
         alumnoDTO.setEmail(alumno.getEmail());
         alumnoDTO.setPassword(alumno.getPassword());
-        alumnoDTO.setRole(Role.ALUMNO);
+        alumnoDTO.setRole(alumno.getRole());
         alumnoDTO.setNombre(alumno.getNombre());
         alumnoDTO.setEdad(alumno.getEdad());
         alumnoDTO.setFechaDeNacimiento(alumno.getFechaDeNacimiento());
@@ -51,7 +51,7 @@ public class AlumnoConverter {
         alumno.setId(alumnoDTO.getId());
         alumno.setEmail(alumnoDTO.getEmail());
         alumno.setPassword(alumnoDTO.getPassword());
-        alumno.setRole(Role.ALUMNO);
+        alumno.setRole(alumnoDTO.getRole());
         alumno.setNombre(alumnoDTO.getNombre());
         alumno.setEdad(alumnoDTO.getEdad());
         alumno.setFechaDeNacimiento(alumnoDTO.getFechaDeNacimiento());
