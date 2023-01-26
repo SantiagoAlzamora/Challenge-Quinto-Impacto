@@ -5,18 +5,12 @@
 package com.challenge.quinto.services;
 
 import com.challenge.quinto.entities.Alumno;
-import com.challenge.quinto.entities.Curso;
-import com.challenge.quinto.entities.Profesor;
 import com.challenge.quinto.entities.converters.AlumnoConverter;
-import com.challenge.quinto.entities.converters.CursoConverter;
 import com.challenge.quinto.entities.dtos.AlumnoDTO;
 import com.challenge.quinto.entities.dtos.CursoDTO;
 import com.challenge.quinto.enums.Role;
 import com.challenge.quinto.repositories.AlumnoRepository;
-import com.challenge.quinto.repositories.CursoRepository;
-import com.challenge.quinto.repositories.ProfesorRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -60,11 +54,11 @@ public class AlumnoService {
         return alumnoConverter.toDTO(alumnos);
 
     }
-
+    
     @Transactional
-    public AlumnoDTO addCursosToAlumno(Integer id, List<CursoDTO> cursosDTO) {
+    public AlumnoDTO addCursosToAlumno(Integer id, List<CursoDTO> cursosDTO){
         AlumnoDTO alumnoDTO = getAlumnoById(id);
-        alumnoDTO.getCursos().addAll(cursosDTO);
+        alumnoDTO.setCursos(cursosDTO);
         Alumno alumno = alumnoConverter.fromDTO(alumnoDTO);
         alumno = alumnoRepository.save(alumno);
         return alumnoConverter.toDTO(alumno);
@@ -85,7 +79,6 @@ public class AlumnoService {
         Alumno alumno = alumnoRepository.findById(id).orElse(null);
         if (alumno != null) {
             alumnoDTO.setPassword(new BCryptPasswordEncoder().encode(alumnoDTO.getPassword()));
-            alumnoDTO.setRole(alumno.getRole());
             alumno = alumnoConverter.fromDTO(alumnoDTO);
             alumno.setId(id);
             alumno = alumnoRepository.save(alumno);

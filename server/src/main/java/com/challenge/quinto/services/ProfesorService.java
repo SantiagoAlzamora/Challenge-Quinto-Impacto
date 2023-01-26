@@ -96,7 +96,6 @@ public class ProfesorService {
         Profesor profesor = profesorRepository.findById(id).orElse(null);
         if (profesor != null) {
             profesorDTO.setPassword(new BCryptPasswordEncoder().encode(profesorDTO.getPassword()));
-            profesorDTO.setRole(profesor.getRole());
             profesor = profesorConverter.fromDTO(profesorDTO);
             profesor.setId(id);
             profesor = profesorRepository.save(profesor);

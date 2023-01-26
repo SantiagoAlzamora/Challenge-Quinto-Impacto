@@ -38,7 +38,6 @@ export default function CursosProfesor() {
     async function enviarCursos(){
         const res = await addCursosProfesor(id,cursosToAdd)
         setCursosToShow(await getCursosWhereProfesorNotIn(id))
-        navigate(`/profesor/${id}`)
     }
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
